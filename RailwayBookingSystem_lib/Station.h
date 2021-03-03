@@ -13,9 +13,13 @@ class Station {
     const string name_;
 
 public:
-    explicit Station(const string &name);
+    Station(const string &name);
 
-    const string &GetName();
+    const string &GetName() const;
+
+    bool operator<(const Station &other) const;
+
+    bool operator==(const Station &other) const;
 };
 
 

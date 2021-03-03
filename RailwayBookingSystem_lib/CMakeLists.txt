@@ -3,12 +3,14 @@ project(RailwayBookingSystemLibrary)
 set(HEADER_FILES
         Date.h
         Station.h
+        Railways.h
         BookingClasses.h
         )
 
 set(SOURCE_FILES
         Date.cpp
         Station.cpp
+        Railways.cpp
         BookingClasses.cpp
         )
 

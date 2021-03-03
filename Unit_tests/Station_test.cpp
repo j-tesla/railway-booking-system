@@ -6,7 +6,8 @@
 #include "Station.h"
 
 
-TEST(StationTests, NameCheck) {
+// tests whether name is saved properly
+TEST(Station, NameCheck) {
     Station kolkata = Station("Kolkata");
-    ASSERT_EQ( kolkata.GetName(), "Kolkata");
+    ASSERT_EQ(kolkata.GetName(), "Kolkata");
 }

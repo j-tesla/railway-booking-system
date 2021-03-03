@@ -8,6 +8,14 @@ Station::Station(const string &name): name_(name) {
 
 }
 
-const string &Station::GetName() {
+const string &Station::GetName() const{
     return name_;
+}
+
+bool Station::operator<(const Station& other) const{
+    return name_ < other.name_;
+}
+
+bool Station::operator==(const Station &other) const{
+    return name_ == other.name_;
 }
