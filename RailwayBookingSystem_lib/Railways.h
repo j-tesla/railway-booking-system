@@ -13,13 +13,14 @@
 
 #include "Station.h"
 
+
 using std::string;
 
 
 class Railways {
-    Railways() = default;
+    Railways();
 
-    ~Railways() = default;
+    ~Railways();
 
     static std::set<Station> sStations;
     static std::map<std::pair<Station, Station>, unsigned> sDistances;
@@ -32,6 +33,7 @@ public:
     static const Railways &IndianRailways();
 
     static unsigned GetDistance(const Station &a, const Station &b);
+
     static unsigned GetDistance(const string &a, const string &b);
 
 };

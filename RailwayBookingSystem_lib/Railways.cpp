@@ -47,3 +47,7 @@ unsigned Railways::GetDistance(const Station &a, const Station &b) {
 unsigned Railways::GetDistance(const string &a, const string &b) {
     return sDistances[{Station(a), Station(b)}];
 }
+
+Railways::Railways() = default;
+
+Railways::~Railways() = default;

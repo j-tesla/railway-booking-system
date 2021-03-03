@@ -7,6 +7,7 @@
 
 #include <string>
 
+
 using std::string;
 
 class Station {
@@ -14,6 +15,8 @@ class Station {
 
 public:
     Station(const string &name);
+
+    ~Station();
 
     const string &GetName() const;
 

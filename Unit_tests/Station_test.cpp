@@ -9,5 +9,5 @@
 // tests whether name is saved properly
 TEST(Station, NameCheck) {
     Station kolkata = Station("Kolkata");
-    ASSERT_EQ(kolkata.GetName(), "Kolkata");
+    EXPECT_EQ(kolkata.GetName(), "Kolkata");
 }

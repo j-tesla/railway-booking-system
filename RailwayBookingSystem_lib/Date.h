@@ -8,7 +8,7 @@
 
 class Date {
     enum Month {Jan = 1, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec};
-//    enum Day {Mon, Tue, Wed, Thu, Fri, Sat, Sun};
+    enum WeekDay {Mon, Tue, Wed, Thu, Fri, Sat, Sun};
     using Day = unsigned int;
     using Year = unsigned int;
     Day day_;
@@ -19,7 +19,7 @@ public:
     // todo errors like day > 30
     Date(Day day, Month month, Year year);
 
-    ~Date() = default;
+    ~Date();
 
     // todo statics
 };

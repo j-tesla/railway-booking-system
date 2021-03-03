@@ -5,3 +5,5 @@
 #include "Date.h"
 
 Date::Date(Date::Day day, Date::Month month, Date::Year year): day_(day), month_(month), year_(year)  {}
+
+Date::~Date() = default;
