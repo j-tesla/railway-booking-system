@@ -7,13 +7,18 @@
 
 
 class Date {
-    enum Month {Jan = 1, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec};
-    enum WeekDay {Mon, Tue, Wed, Thu, Fri, Sat, Sun};
+    enum Month {
+        Jan = 1, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec
+    };
+    enum WeekDay {
+        Mon, Tue, Wed, Thu, Fri, Sat, Sun
+    };
     using Day = unsigned int;
     using Year = unsigned int;
-    Day day_;
-    Month month_;
-    Year year_;
+
+    const Day day_;
+    const Month month_;
+    const Year year_;
 
 public:
     // todo errors like day > 30
