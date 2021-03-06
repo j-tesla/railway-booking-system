@@ -14,12 +14,25 @@ class Station {
     const string name_;
 
 public:
+    /**
+     * Station identified by its name
+     * @param name
+     */
     Station(const string &name);
 
     ~Station();
 
+    /**
+     *
+     * @return name of station
+     */
     const string &GetName() const;
 
+    /**
+     * compare names (strings)
+     * @param other
+     * @return bool
+     */
     bool operator<(const Station &other) const;
 
     bool operator==(const Station &other) const;

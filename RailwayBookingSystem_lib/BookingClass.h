@@ -12,8 +12,10 @@
 
 using std::string;
 
+/**
+ * base class for all booking classes
+ */
 class BookingClass {
-    BookingClass(const BookingClass &other);
 
 protected:
     BookingClass();
@@ -21,29 +23,64 @@ protected:
     virtual ~BookingClass();
 
 public:
+    /**
+     * Booking class type objects are uncopyable
+     * @param other
+     */
+    BookingClass(const BookingClass &other) = delete;
+
+    /**
+     *
+     * @return name of booking class
+     */
     virtual string GetName() const = 0;
 
+    /**
+     *
+     * @return bool value if class is sitting type
+     */
     virtual bool IsSitting() const = 0;
 
+    /**
+     *
+     * @return bool value if class s of AC type
+     */
     virtual bool IsAc() const = 0;
 
+    /**
+     *
+     * @return bool value is class considered as luxury class
+     */
     virtual bool IsLuxury() const = 0;
 
+    /**
+     *
+     * @return number of tiers
+     */
     virtual unsigned GetNumberOfTiers() const = 0;
 
+    /**
+     *
+     * @return loadFactor
+     */
     virtual float GetLoadFactor() const = 0;
-
 
     virtual bool operator==(const BookingClass &other) const;
 
     friend std::ostream &operator<<(std::ostream &os, const BookingClass &aClass);
 };
 
+/**
+ * base class for all sitting classes
+ */
 class SeatClass : public BookingClass {
 public:
     bool IsSitting() const override;
 };
 
+/**
+ * base class for all sleeping classes
+ */
 class BerthClass : public BookingClass {
 public:
     bool IsSitting() const override;

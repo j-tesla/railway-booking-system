@@ -3,3 +3,6 @@
 //
 
 #include "Passenger.h"
+
+
+Passenger::Passenger() = default;

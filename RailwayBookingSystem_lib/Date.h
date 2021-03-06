@@ -12,21 +12,27 @@
 
 using std::string;
 
+
 class Date {
+public:
     using Day = unsigned short;
     using Month = unsigned short;
     using Year = unsigned short;
 
+private:
     const Day day_;
     const Month month_;
     const Year year_;
-
-    static const std::map<Month, string> sMonthNames;
 
 public:
     Date(Day day, Month month, Year year);
 
     ~Date();
+
+    /**
+     * 3 letter month codes
+     */
+    static const std::map<Month, string> sMonthNames;
 
     bool operator==(const Date &other) const;
 

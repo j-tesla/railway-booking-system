@@ -2,10 +2,16 @@
 // Created by j-tesla on 03/03/21.
 //
 
+
+#include <sstream>
+
 #include "gtest/gtest.h"
+#include "gmock/gmock.h"
+
 #include "BookingClass.h"
 
 
+// checks names of the classes
 TEST(BookingClasses_test, NameCheck) {
     EXPECT_EQ(ACFirstClass::Type().GetName(), "AC First Class");
     EXPECT_EQ(AC2Tier::Type().GetName(), "AC 2 Tier");
@@ -16,6 +22,7 @@ TEST(BookingClasses_test, NameCheck) {
     EXPECT_EQ(SecondSitting::Type().GetName(), "Second Sitting");
 }
 
+// checks Ac property of classes
 TEST(BookingClasses_test, IsACCheck) {
     EXPECT_EQ(ACFirstClass::Type().IsAc(), true);
     EXPECT_EQ(AC2Tier::Type().IsAc(), true);
@@ -26,6 +33,8 @@ TEST(BookingClasses_test, IsACCheck) {
     EXPECT_EQ(SecondSitting::Type().IsAc(), false);
 }
 
+// depends on initialised const values
+// checks luxury status of classes
 TEST(BookingClasses_test, IsLuxuryCheck) {
     EXPECT_EQ(ACFirstClass::Type().IsLuxury(), true);
     EXPECT_EQ(AC2Tier::Type().IsLuxury(), false);
@@ -36,6 +45,7 @@ TEST(BookingClasses_test, IsLuxuryCheck) {
     EXPECT_EQ(SecondSitting::Type().IsLuxury(), false);
 }
 
+// checks number of tiers of classes
 TEST(BookingClasses_test, NumberOfTiersCheck) {
     EXPECT_EQ(ACFirstClass::Type().GetNumberOfTiers(), 2);
     EXPECT_EQ(AC2Tier::Type().GetNumberOfTiers(), 2);
@@ -46,7 +56,9 @@ TEST(BookingClasses_test, NumberOfTiersCheck) {
     EXPECT_EQ(SecondSitting::Type().GetNumberOfTiers(), 0);
 }
 
-TEST(BookingClasses_test, DefaultLoadFactor) {
+// depends on initialised const values
+// checks load factor
+TEST(BookingClasses_test, LoadFactorCheck) {
     EXPECT_FLOAT_EQ(ACFirstClass::Type().GetLoadFactor(), 3.00);
     EXPECT_FLOAT_EQ(AC2Tier::Type().GetLoadFactor(), 2.00);
     EXPECT_FLOAT_EQ(FirstClass::Type().GetLoadFactor(), 2.00);
@@ -54,4 +66,25 @@ TEST(BookingClasses_test, DefaultLoadFactor) {
     EXPECT_FLOAT_EQ(ACChairCar::Type().GetLoadFactor(), 1.25);
     EXPECT_FLOAT_EQ(Sleeper::Type().GetLoadFactor(), 1.00);
     EXPECT_FLOAT_EQ(SecondSitting::Type().GetLoadFactor(), 0.50);
+}
+
+// checks format of ostream << overload output
+TEST(BookingClasses_test, OstreamFormatCheck) {
+    std::stringstream buffer;
+    buffer << ACFirstClass::Type();
+    std::string line;
+    getline(buffer, line);
+    EXPECT_THAT(line, testing::MatchesRegex(R"(Travel Class = .*)"));
+
+    getline(buffer, line);
+    EXPECT_THAT(line, testing::MatchesRegex(R"(  - Mode: (Sitting|Sleeping))"));
+
+    getline(buffer, line);
+    EXPECT_THAT(line, testing::MatchesRegex(R"(  - AC: (Yes)|(No))"));
+
+    getline(buffer, line);
+    EXPECT_THAT(line, testing::MatchesRegex(R"(  - Bunks: [0-9]*)"));
+
+    getline(buffer, line);
+    EXPECT_THAT(line, testing::MatchesRegex(R"(  - Luxury: (Yes)|(No))"));
 }

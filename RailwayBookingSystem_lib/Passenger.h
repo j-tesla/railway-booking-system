@@ -6,7 +6,14 @@
 #define RAILWAYBOOKINGSYSTEM_PASSENGER_H
 
 
+/**
+ * abstract class for future extension
+ */
 class Passenger {
+public:
+    Passenger();
+
+    virtual ~Passenger() = 0;
 };
 
 

@@ -8,7 +8,6 @@
 #include <set>
 #include <map>
 #include <utility>
-#include <vector>
 #include <string>
 
 #include "Station.h"
@@ -26,10 +25,26 @@ class Railways {
     static const std::map<std::pair<const Station, const Station>, unsigned> sDistances;
 
 public:
+    /**
+     * IndianRailways is a singleton instance of Railways
+     * @return reference to India Railways
+     */
     static const Railways &IndianRailways();
 
+    /**
+     * Distance between two stations in the IndianRailways
+     * @param a Station
+     * @param b Station
+     * @return distance
+     */
     static unsigned GetDistance(const Station &a, const Station &b);
 
+    /**
+     * Distance between two stations in the IndianRailways
+     * @param a name of Station
+     * @param b name of Station
+     * @return distance
+     */
     static unsigned GetDistance(const string &a, const string &b);
 
 };

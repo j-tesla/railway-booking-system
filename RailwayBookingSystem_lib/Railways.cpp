@@ -19,6 +19,7 @@ std::set<Station> IndianRailwayStations() {
 }
 
 std::map<std::pair<const Station, const Station>, unsigned> IndianRailwayStationDistances() {
+    // master data for Indian Railways Station details
     std::map<std::pair<const Station, const Station>, unsigned> distances;
 
     distances[{Station("Mumbai"), Station("Delhi")}] = distances[{Station("Delhi"), Station("Mumbai")}] = 1447;

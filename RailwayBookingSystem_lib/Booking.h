@@ -9,29 +9,117 @@
 #include <string>
 #include <ostream>
 
-
-using std::string;
-
 #include "Station.h"
 #include "Date.h"
 #include "BookingClass.h"
 #include "Passenger.h"
 #include "Railways.h"
 
-class Booking {
+
+using std::string;
+
+/**
+ * Abstract base for extension of Booking implementations
+ */
+class BookingBase {
+    const unsigned PNR;
+
+    static std::set<const BookingBase *> sBookings;
+    static unsigned sBookingPNRSerial;
+
+protected:
     const Station fromStation_;
     const Station toStation_;
     const Date date_;
     const BookingClass &bookingClass_;
     Passenger *passenger_;
 
-    const unsigned PNR;
-    bool bookingStatus_;
-    string bookingMessage_;
+    bool bookingStatus_ = false;
+    string bookingMessage_{};
 
-    static std::set<const Booking *> sBookings;
-    static unsigned sBookingPNRSerial;
+public:
+    /**
+     * constructor
+     * @param fromStation
+     * @param toStation
+     * @param date
+     * @param bookingClass Type object of BookingClasses
+     * @param passenger
+     */
+    BookingBase(const Station &fromStation, const Station &toStation, const Date &date,
+                const BookingClass &bookingClass,
+                Passenger *passenger = nullptr);
 
+    // A BookingBase object should not be copyable
+    BookingBase(const BookingBase &other) = delete;
+
+    virtual ~BookingBase();
+
+    // pure virtual function to implemented in derived classes
+    virtual unsigned ComputeFare() const = 0;
+
+    /**
+     *
+     * @return FromStation of the journey
+     */
+    const Station &GetFromStation() const;
+
+    /**
+     *
+     * @return ToStation of the journey
+     */
+    const Station &GetToStation() const;
+
+    /**
+     *
+     * @return date of the journey
+     */
+    const Date &GetDate() const;
+
+    /**
+     *
+     * @return booking class
+     */
+    const BookingClass &GetBookingClass() const;
+
+    /**
+     *
+     * @return passenger
+     */
+    Passenger *GetPassenger() const;
+
+    /**
+     * PNR is the unique identification code of the booking
+     * @return PNR of the booking
+     */
+    unsigned int GetPNR() const;
+
+    /**
+     * Booking status is true if confirmed
+     * @return booking status
+     */
+    bool GetBookingStatus() const;
+
+    /**
+     * Message related to the status of booking
+     * @return booking message
+     */
+    const string &GetBookingMessage() const;
+
+    /**
+     * Booking is active if in created object is in scope and accessible
+     * @return set of pointers to active bookings
+     */
+    static const std::set<const BookingBase *> &GetBookings();
+
+    friend std::ostream &operator<<(std::ostream &os, const BookingBase &booking);
+};
+
+
+/**
+ * Booking from anywhere to anywhere on any date is always available
+ */
+class Booking : public BookingBase {
     // needs initiate in application
     static const float sBaseFareRate;
     // needs initiate in application
@@ -39,45 +127,21 @@ class Booking {
     // needs initiate in application
     static const float sLuxuryTaxPercent;
 
-    void DoBooking();
-
-    Booking(const Booking &other);
-
 public:
     /**
-     * Booking from a station to a station on a date (always available)
+     * constructor to always available booking
      * @param fromStation
      * @param toStation
      * @param date
      * @param bookingClass Type object of BookingClasses
-     * @param passenger (optional for now)
      */
-    Booking(const Station &fromStation, const Station &toStation, const Date &date, const BookingClass &bookingClass,
-            Passenger *passenger = nullptr);
+    Booking(const Station &fromStation, const Station &toStation, const Date &date, const BookingClass &bookingClass);
 
-    virtual ~Booking();
-
-    virtual unsigned ComputeFare() const;
-
-    const Station &GetFromStation() const;
-
-    const Station &GetToStation() const;
-
-    const Date &GetDate() const;
-
-    const BookingClass &GetBookingClass() const;
-
-    Passenger *GetPassenger() const;
-
-    unsigned int GetPNR() const;
-
-    bool GetBookingStatus() const;
-
-    const string &GetBookingMessage() const;
-
-    static const std::set<const Booking *> &GetBookings();
-
-    friend std::ostream &operator<<(std::ostream &os, const Booking &booking);
+    /**
+     * computes fare for the booking from with the business logic
+     * @return fare in Rupees (rounded off to nearest integer)
+     */
+    unsigned ComputeFare() const override;
 };
 
 
