@@ -1,0 +1,13 @@
+//
+// Created by j-tesla on 03/03/21.
+//
+
+#ifndef RAILWAYBOOKINGSYSTEM_PASSENGER_H
+#define RAILWAYBOOKINGSYSTEM_PASSENGER_H
+
+
+class Passenger {
+};
+
+
+#endif //RAILWAYBOOKINGSYSTEM_PASSENGER_H

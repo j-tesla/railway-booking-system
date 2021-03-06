@@ -7,11 +7,13 @@
 
 
 #include <string>
+#include <ostream>
 
 
 using std::string;
 
 class BookingClass {
+    BookingClass(const BookingClass &other);
 
 protected:
     BookingClass();
@@ -32,6 +34,10 @@ public:
     virtual float GetLoadFactor() const = 0;
 
     virtual void SetLoadFactor(float loadFactor) const = 0;
+
+    virtual bool operator==(const BookingClass &other) const;
+
+    friend std::ostream &operator<<(std::ostream &os, const BookingClass &aClass);
 };
 
 class SeatClass : public BookingClass {

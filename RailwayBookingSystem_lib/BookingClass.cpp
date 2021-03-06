@@ -253,3 +253,16 @@ float SecondSitting::GetLoadFactor() const {
 void SecondSitting::SetLoadFactor(float loadFactor) const {
     sLoadFactor = loadFactor;
 }
+
+bool BookingClass::operator==(const BookingClass &other) const {
+    return GetName() == other.GetName();
+}
+
+std::ostream &operator<<(std::ostream &os, const BookingClass &aClass) {
+    os << "Travel Class = " << aClass.GetName() << "\n";
+    os << "  - Mode: " << (aClass.IsSitting() ? "Sitting" : "Sleeping") << "\n";
+    os << "  - AC: " << (aClass.IsAc() ? "Yes" : "No") << "\n";
+    os << "  - Bunks: " << aClass.GetNumberOfTiers() << "\n";
+    os << "  - Luxury: " << (aClass.IsLuxury() ? "Yes" : "No");
+    return os;
+}

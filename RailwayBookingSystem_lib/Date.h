@@ -5,28 +5,33 @@
 #ifndef RAILWAYBOOKINGSYSTEM_DATE_H
 #define RAILWAYBOOKINGSYSTEM_DATE_H
 
+#include <map>
+#include <string>
+#include <ostream>
+
+
+using std::string;
 
 class Date {
-    enum Month {
-        Jan = 1, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec
-    };
-    enum WeekDay {
-        Mon, Tue, Wed, Thu, Fri, Sat, Sun
-    };
-    using Day = unsigned int;
-    using Year = unsigned int;
+    using Day = unsigned short;
+    using Month = unsigned short;
+    using Year = unsigned short;
 
     const Day day_;
     const Month month_;
     const Year year_;
 
+    static const std::map<Month, string> sMonthNames;
+
 public:
-    // todo errors like day > 30
     Date(Day day, Month month, Year year);
 
     ~Date();
 
-    // todo statics
+    bool operator==(const Date &other) const;
+
+    friend std::ostream &operator<<(std::ostream &os, const Date &date);
+
 };
 
 
