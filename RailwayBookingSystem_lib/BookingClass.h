@@ -1,5 +1,5 @@
 //
-// Created by j-tesla on 02/03/21.
+// Created by Jayanth PSY (19CS10068) on 02/03/21.
 //
 
 #ifndef RAILWAYBOOKINGSYSTEM_BOOKINGCLASS_H
@@ -87,10 +87,8 @@ public:
 };
 
 class ACFirstClass : public BerthClass {
-    // needs initiate in application
-    static const float sLoadFactor;
-    // needs initiate in application
-    static const bool sIsLuxury;
+    static const float sLoadFactor;     //!< needs initiate in application
+    static const bool sIsLuxury;        //!< needs initiate in application
 
 public:
     static const BookingClass &Type();
@@ -108,10 +106,8 @@ public:
 };
 
 class AC2Tier : public BerthClass {
-    // needs initiate in application
-    static const float sLoadFactor;
-    // needs initiate in application
-    static const bool sIsLuxury;
+    static const float sLoadFactor;     //!< needs initiate in application
+    static const bool sIsLuxury;        //!< needs initiate in application
 
 public:
     static const BookingClass &Type();
@@ -129,10 +125,8 @@ public:
 };
 
 class FirstClass : public BerthClass {
-    // needs initiate in application
-    static const float sLoadFactor;
-    // needs initiate in application
-    static const bool sIsLuxury;
+    static const float sLoadFactor;     //!< needs initiate in application
+    static const bool sIsLuxury;        //!< needs initiate in application
 
 public:
     static const BookingClass &Type();
@@ -150,10 +144,8 @@ public:
 };
 
 class AC3Tier : public BerthClass {
-    // needs initiate in application
-    static const float sLoadFactor;
-    // needs initiate in application
-    static const bool sIsLuxury;
+    static const float sLoadFactor;     //!< needs initiate in application
+    static const bool sIsLuxury;        //!< needs initiate in application
 
 public:
     static const BookingClass &Type();
@@ -171,9 +163,8 @@ public:
 };
 
 class ACChairCar : public SeatClass {
-    static const float sLoadFactor;
-    // needs initiate in application
-    static const bool sIsLuxury;
+    static const float sLoadFactor;     //!< needs initiate in application
+    static const bool sIsLuxury;        //!< needs initiate in application
 
 public:
     // needs initiate in application
@@ -192,10 +183,8 @@ public:
 };
 
 class Sleeper : public SeatClass {
-    // needs initiate in application
-    static const float sLoadFactor;
-    // needs initiate in application
-    static const bool sIsLuxury;
+    static const float sLoadFactor;     //!< needs initiate in application
+    static const bool sIsLuxury;        //!< needs initiate in application
 
 public:
     static const BookingClass &Type();
@@ -213,10 +202,8 @@ public:
 };
 
 class SecondSitting : public SeatClass {
-    // needs initiate in application
-    static const float sLoadFactor;
-    // needs initiate in application
-    static const bool sIsLuxury;
+    static const float sLoadFactor;     //!< needs initiate in application
+    static const bool sIsLuxury;        //!< needs initiate in application
 
 public:
     static const BookingClass &Type();

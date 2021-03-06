@@ -1,5 +1,5 @@
 //
-// Created by j-tesla on 03/03/21.
+// Created by Jayanth PSY (19CS10068) on 03/03/21.
 //
 
 #ifndef RAILWAYBOOKINGSYSTEM_BOOKING_H
@@ -50,12 +50,17 @@ public:
                 const BookingClass &bookingClass,
                 Passenger *passenger = nullptr);
 
-    // A BookingBase object should not be copyable
+    /**
+     *  A BookingBase object should not be copyable
+     * @param other
+     */
     BookingBase(const BookingBase &other) = delete;
 
     virtual ~BookingBase();
 
-    // pure virtual function to implemented in derived classes
+    /*
+     * pure virtual function to implemented in derived classes
+     */
     virtual unsigned ComputeFare() const = 0;
 
     /**
@@ -120,12 +125,9 @@ public:
  * Booking from anywhere to anywhere on any date is always available
  */
 class Booking : public BookingBase {
-    // needs initiate in application
-    static const float sBaseFareRate;
-    // needs initiate in application
-    static const float sACSurcharge;
-    // needs initiate in application
-    static const float sLuxuryTaxPercent;
+    static const float sBaseFareRate;        //!< needs initiate in application
+    static const float sACSurcharge;        //!< needs initiate in application
+    static const float sLuxuryTaxPercent;       //!< needs initiate in application
 
 public:
     /**

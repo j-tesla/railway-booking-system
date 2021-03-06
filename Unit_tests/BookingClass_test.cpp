@@ -1,5 +1,5 @@
 //
-// Created by j-tesla on 03/03/21.
+// Created by Jayanth PSY (19CS10068) on 03/03/21.
 //
 
 
@@ -11,7 +11,9 @@
 #include "BookingClass.h"
 
 
-// checks names of the classes
+/**
+ * checks names of the classes
+ */
 TEST(BookingClasses_test, NameCheck) {
     EXPECT_EQ(ACFirstClass::Type().GetName(), "AC First Class");
     EXPECT_EQ(AC2Tier::Type().GetName(), "AC 2 Tier");
@@ -22,7 +24,9 @@ TEST(BookingClasses_test, NameCheck) {
     EXPECT_EQ(SecondSitting::Type().GetName(), "Second Sitting");
 }
 
-// checks Ac property of classes
+/**
+ * checks Ac property of classes
+ */
 TEST(BookingClasses_test, IsACCheck) {
     EXPECT_EQ(ACFirstClass::Type().IsAc(), true);
     EXPECT_EQ(AC2Tier::Type().IsAc(), true);
@@ -33,8 +37,10 @@ TEST(BookingClasses_test, IsACCheck) {
     EXPECT_EQ(SecondSitting::Type().IsAc(), false);
 }
 
-// depends on initialised const values
-// checks luxury status of classes
+/**
+ * checks luxury status of classes
+ * depends on initialised const values
+ */
 TEST(BookingClasses_test, IsLuxuryCheck) {
     EXPECT_EQ(ACFirstClass::Type().IsLuxury(), true);
     EXPECT_EQ(AC2Tier::Type().IsLuxury(), false);
@@ -45,7 +51,9 @@ TEST(BookingClasses_test, IsLuxuryCheck) {
     EXPECT_EQ(SecondSitting::Type().IsLuxury(), false);
 }
 
-// checks number of tiers of classes
+/**
+ * checks number of tiers of classes
+ */
 TEST(BookingClasses_test, NumberOfTiersCheck) {
     EXPECT_EQ(ACFirstClass::Type().GetNumberOfTiers(), 2);
     EXPECT_EQ(AC2Tier::Type().GetNumberOfTiers(), 2);
@@ -56,8 +64,10 @@ TEST(BookingClasses_test, NumberOfTiersCheck) {
     EXPECT_EQ(SecondSitting::Type().GetNumberOfTiers(), 0);
 }
 
-// depends on initialised const values
-// checks load factor
+/**
+ * checks load factor
+ * depends on initialised const values
+ */
 TEST(BookingClasses_test, LoadFactorCheck) {
     EXPECT_FLOAT_EQ(ACFirstClass::Type().GetLoadFactor(), 3.00);
     EXPECT_FLOAT_EQ(AC2Tier::Type().GetLoadFactor(), 2.00);
@@ -68,7 +78,9 @@ TEST(BookingClasses_test, LoadFactorCheck) {
     EXPECT_FLOAT_EQ(SecondSitting::Type().GetLoadFactor(), 0.50);
 }
 
-// checks format of ostream << overload output
+/**
+ * checks format of ostream << overload output
+ */
 TEST(BookingClasses_test, OstreamFormatCheck) {
     std::stringstream buffer;
     buffer << ACFirstClass::Type();

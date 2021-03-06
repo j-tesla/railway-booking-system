@@ -1,5 +1,5 @@
 //
-// Created by j-tesla on 02/03/21.
+// Created by Jayanth PSY (19CS10068) on 02/03/21.
 //
 
 #ifndef RAILWAYBOOKINGSYSTEM_STATION_H
@@ -11,7 +11,7 @@
 using std::string;
 
 class Station {
-    const string name_;
+    const string name_; //!< name of the station
 
 public:
     /**

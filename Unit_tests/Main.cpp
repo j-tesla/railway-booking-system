@@ -1,6 +1,7 @@
 //
-// Created by j-tesla on 06/03/21.
+// Created by Jayanth PSY (19CS10068) on 06/03/21.
 //
+
 #include <iostream>
 
 #include "gtest/gtest.h"
@@ -30,6 +31,12 @@ const float Booking::sACSurcharge = 50.00; // Rs
 const float Booking::sLuxuryTaxPercent = 25.0 / 100;
 
 
+/**
+ * Initialises Google tests and runs all the tests
+ * @param argc
+ * @param argv
+ * @return
+ */
 int main(int argc, char **argv) {
     std::cout << "Running main() for tests from " << __FILE__ << std::endl;
     testing::InitGoogleTest(&argc, argv);

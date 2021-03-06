@@ -1,5 +1,5 @@
 //
-// Created by j-tesla on 06/03/21.
+// Created by Jayanth PSY (19CS10068) on 06/03/21.
 //
 
 #include <sstream>
@@ -9,7 +9,9 @@
 #include "Date.h"
 
 
-// checks ostream << output
+/**
+ * checks ostream << overload output
+ */
 TEST(Date_test, OstreamCheck) {
     Date d1(5, 5, 2025);
     Date d2(12, 2, 2022);

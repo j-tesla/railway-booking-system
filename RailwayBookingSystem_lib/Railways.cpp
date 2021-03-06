@@ -1,11 +1,8 @@
 //
-// Created by j-tesla on 03/03/21.
+// Created by Jayanth PSY (19CS10068) on 03/03/21.
 //
 #include "Railways.h"
 
-
-//const std::set<Station> Railways::sStations = {};
-//const std::map<std::pair<const Station, const Station>, unsigned> Railways::sDistances = {};
 
 std::set<Station> IndianRailwayStations() {
     std::set<Station> stations;
@@ -18,8 +15,12 @@ std::set<Station> IndianRailwayStations() {
     return stations;
 }
 
+/**
+ * master data for Indian Railways Station details
+ * @return
+ */
 std::map<std::pair<const Station, const Station>, unsigned> IndianRailwayStationDistances() {
-    // master data for Indian Railways Station details
+
     std::map<std::pair<const Station, const Station>, unsigned> distances;
 
     distances[{Station("Mumbai"), Station("Delhi")}] = distances[{Station("Delhi"), Station("Mumbai")}] = 1447;
