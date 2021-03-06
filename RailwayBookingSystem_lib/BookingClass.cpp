@@ -25,8 +25,6 @@ bool BerthClass::IsSitting() const {
 
 // ACFirstClass:
 
-float ACFirstClass::sLoadFactor = 3.00;
-
 const BookingClass &ACFirstClass::Type() {
     static const ACFirstClass theObj;
     return theObj;
@@ -41,7 +39,7 @@ bool ACFirstClass::IsAc() const {
 }
 
 bool ACFirstClass::IsLuxury() const {
-    return true;
+    return sIsLuxury;
 }
 
 unsigned int ACFirstClass::GetNumberOfTiers() const {
@@ -52,13 +50,8 @@ float ACFirstClass::GetLoadFactor() const {
     return sLoadFactor;
 }
 
-void ACFirstClass::SetLoadFactor(float loadFactor) const {
-    sLoadFactor = loadFactor;
-}
 
 // AC2Tier:
-
-float AC2Tier::sLoadFactor = 2.00;
 
 const BookingClass &AC2Tier::Type() {
     static const AC2Tier theObj;
@@ -74,7 +67,7 @@ bool AC2Tier::IsAc() const {
 }
 
 bool AC2Tier::IsLuxury() const {
-    return false;
+    return sIsLuxury;
 }
 
 unsigned int AC2Tier::GetNumberOfTiers() const {
@@ -85,13 +78,8 @@ float AC2Tier::GetLoadFactor() const {
     return sLoadFactor;
 }
 
-void AC2Tier::SetLoadFactor(float loadFactor) const {
-    sLoadFactor = loadFactor;
-}
 
 // FirstClass:
-
-float FirstClass::sLoadFactor = 2.00;
 
 const BookingClass &FirstClass::Type() {
     static const FirstClass theObj;
@@ -107,7 +95,7 @@ bool FirstClass::IsAc() const {
 }
 
 bool FirstClass::IsLuxury() const {
-    return true;
+    return sIsLuxury;
 }
 
 unsigned int FirstClass::GetNumberOfTiers() const {
@@ -118,13 +106,8 @@ float FirstClass::GetLoadFactor() const {
     return sLoadFactor;
 }
 
-void FirstClass::SetLoadFactor(float loadFactor) const {
-    sLoadFactor = loadFactor;
-}
 
 // AC3Tier:
-
-float AC3Tier::sLoadFactor = 1.75;
 
 const BookingClass &AC3Tier::Type() {
     static const AC3Tier theObj;
@@ -140,7 +123,7 @@ bool AC3Tier::IsAc() const {
 }
 
 bool AC3Tier::IsLuxury() const {
-    return false;
+    return sIsLuxury;
 }
 
 unsigned int AC3Tier::GetNumberOfTiers() const {
@@ -151,13 +134,8 @@ float AC3Tier::GetLoadFactor() const {
     return sLoadFactor;
 }
 
-void AC3Tier::SetLoadFactor(float loadFactor) const {
-    sLoadFactor = loadFactor;
-}
 
 // ACChairCar:
-
-float ACChairCar::sLoadFactor = 1.25;
 
 const BookingClass &ACChairCar::Type() {
     static const ACChairCar theObj;
@@ -173,7 +151,7 @@ bool ACChairCar::IsAc() const {
 }
 
 bool ACChairCar::IsLuxury() const {
-    return false;
+    return sIsLuxury;
 }
 
 unsigned int ACChairCar::GetNumberOfTiers() const {
@@ -184,13 +162,8 @@ float ACChairCar::GetLoadFactor() const {
     return sLoadFactor;
 }
 
-void ACChairCar::SetLoadFactor(float loadFactor) const {
-    sLoadFactor = loadFactor;
-}
 
 // Sleeper:
-
-float Sleeper::sLoadFactor = 1.00;
 
 const BookingClass &Sleeper::Type() {
     static const Sleeper theObj;
@@ -206,7 +179,7 @@ bool Sleeper::IsAc() const {
 }
 
 bool Sleeper::IsLuxury() const {
-    return false;
+    return sIsLuxury;
 }
 
 unsigned int Sleeper::GetNumberOfTiers() const {
@@ -217,13 +190,8 @@ float Sleeper::GetLoadFactor() const {
     return sLoadFactor;
 }
 
-void Sleeper::SetLoadFactor(float loadFactor) const {
-    sLoadFactor = loadFactor;
-}
 
 // SecondSitting:
-
-float SecondSitting::sLoadFactor = 0.50;
 
 const BookingClass &SecondSitting::Type() {
     static const SecondSitting theObj;
@@ -239,7 +207,7 @@ bool SecondSitting::IsAc() const {
 }
 
 bool SecondSitting::IsLuxury() const {
-    return false;
+    return sIsLuxury;
 }
 
 unsigned int SecondSitting::GetNumberOfTiers() const {
@@ -250,9 +218,6 @@ float SecondSitting::GetLoadFactor() const {
     return sLoadFactor;
 }
 
-void SecondSitting::SetLoadFactor(float loadFactor) const {
-    sLoadFactor = loadFactor;
-}
 
 bool BookingClass::operator==(const BookingClass &other) const {
     return GetName() == other.GetName();

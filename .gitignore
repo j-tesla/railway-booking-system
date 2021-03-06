@@ -11,6 +11,7 @@ gen
 cmake-build-debug
 cmake-build-release
 cmake-build-debug-coverage
+cmake-build-release-coverage
 CMakeLists.txt.user
 CMakeCache.txt
 CMakeFiles

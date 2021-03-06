@@ -7,7 +7,7 @@
 
 
 #include <string>
-#include <ostream>
+#include <iostream>
 
 
 using std::string;
@@ -33,7 +33,6 @@ public:
 
     virtual float GetLoadFactor() const = 0;
 
-    virtual void SetLoadFactor(float loadFactor) const = 0;
 
     virtual bool operator==(const BookingClass &other) const;
 
@@ -51,7 +50,10 @@ public:
 };
 
 class ACFirstClass : public BerthClass {
-    static float sLoadFactor;
+    // needs initiate in application
+    static const float sLoadFactor;
+    // needs initiate in application
+    static const bool sIsLuxury;
 
 public:
     static const BookingClass &Type();
@@ -66,11 +68,13 @@ public:
 
     float GetLoadFactor() const override;
 
-    void SetLoadFactor(float loadFactor) const override;
 };
 
 class AC2Tier : public BerthClass {
-    static float sLoadFactor;
+    // needs initiate in application
+    static const float sLoadFactor;
+    // needs initiate in application
+    static const bool sIsLuxury;
 
 public:
     static const BookingClass &Type();
@@ -85,11 +89,13 @@ public:
 
     float GetLoadFactor() const override;
 
-    void SetLoadFactor(float loadFactor) const override;
 };
 
 class FirstClass : public BerthClass {
-    static float sLoadFactor;
+    // needs initiate in application
+    static const float sLoadFactor;
+    // needs initiate in application
+    static const bool sIsLuxury;
 
 public:
     static const BookingClass &Type();
@@ -104,11 +110,13 @@ public:
 
     float GetLoadFactor() const override;
 
-    void SetLoadFactor(float loadFactor) const override;
 };
 
 class AC3Tier : public BerthClass {
-    static float sLoadFactor;
+    // needs initiate in application
+    static const float sLoadFactor;
+    // needs initiate in application
+    static const bool sIsLuxury;
 
 public:
     static const BookingClass &Type();
@@ -123,13 +131,15 @@ public:
 
     float GetLoadFactor() const override;
 
-    void SetLoadFactor(float loadFactor) const override;
 };
 
 class ACChairCar : public SeatClass {
-    static float sLoadFactor;
+    static const float sLoadFactor;
+    // needs initiate in application
+    static const bool sIsLuxury;
 
 public:
+    // needs initiate in application
     static const BookingClass &Type();
 
     string GetName() const override;
@@ -142,11 +152,13 @@ public:
 
     float GetLoadFactor() const override;
 
-    void SetLoadFactor(float loadFactor) const override;
 };
 
 class Sleeper : public SeatClass {
-    static float sLoadFactor;
+    // needs initiate in application
+    static const float sLoadFactor;
+    // needs initiate in application
+    static const bool sIsLuxury;
 
 public:
     static const BookingClass &Type();
@@ -161,11 +173,13 @@ public:
 
     float GetLoadFactor() const override;
 
-    void SetLoadFactor(float loadFactor) const override;
 };
 
 class SecondSitting : public SeatClass {
-    static float sLoadFactor;
+    // needs initiate in application
+    static const float sLoadFactor;
+    // needs initiate in application
+    static const bool sIsLuxury;
 
 public:
     static const BookingClass &Type();
@@ -180,7 +194,6 @@ public:
 
     float GetLoadFactor() const override;
 
-    void SetLoadFactor(float loadFactor) const override;
 };
 
 

@@ -18,7 +18,6 @@ using std::string;
 #include "Passenger.h"
 #include "Railways.h"
 
-
 class Booking {
     const Station fromStation_;
     const Station toStation_;
@@ -30,17 +29,29 @@ class Booking {
     bool bookingStatus_;
     string bookingMessage_;
 
-    static float sBaseFareRate;
     static std::set<const Booking *> sBookings;
     static unsigned sBookingPNRSerial;
-    static float sACSurcharge;
-    static float sLuxuryTaxPercent;
+
+    // needs initiate in application
+    static const float sBaseFareRate;
+    // needs initiate in application
+    static const float sACSurcharge;
+    // needs initiate in application
+    static const float sLuxuryTaxPercent;
 
     void DoBooking();
 
     Booking(const Booking &other);
 
 public:
+    /**
+     * Booking from a station to a station on a date (always available)
+     * @param fromStation
+     * @param toStation
+     * @param date
+     * @param bookingClass Type object of BookingClasses
+     * @param passenger (optional for now)
+     */
     Booking(const Station &fromStation, const Station &toStation, const Date &date, const BookingClass &bookingClass,
             Passenger *passenger = nullptr);
 

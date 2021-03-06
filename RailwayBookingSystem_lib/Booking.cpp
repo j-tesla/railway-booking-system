@@ -19,11 +19,8 @@ Booking::Booking(const Station &fromStation, const Station &toStation, const Dat
     sBookings.insert(this);
 }
 
-float Booking::sBaseFareRate = 0.50; // Rs/km
 std::set<const Booking *> Booking::sBookings = {};
 unsigned Booking::sBookingPNRSerial = 1;
-float Booking::sACSurcharge = 50.00; // Rs
-float Booking::sLuxuryTaxPercent = 25.0 / 100;
 
 unsigned Booking::ComputeFare() const {
     float baseFare = sBaseFareRate * Railways::IndianRailways().GetDistance(fromStation_, toStation_);

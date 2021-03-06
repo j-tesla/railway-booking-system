@@ -55,22 +55,3 @@ TEST(BookingClasses_test, DefaultLoadFactor) {
     EXPECT_FLOAT_EQ(Sleeper::Type().GetLoadFactor(), 1.00);
     EXPECT_FLOAT_EQ(SecondSitting::Type().GetLoadFactor(), 0.50);
 }
-
-TEST(BookingClasses_test, SetLoadFactorCheck) {
-
-    ACFirstClass::Type().SetLoadFactor(12.5);
-    AC2Tier::Type().SetLoadFactor(12.5);
-    FirstClass::Type().SetLoadFactor(12.5);
-    AC3Tier::Type().SetLoadFactor(12.5);
-    ACChairCar::Type().SetLoadFactor(12.5);
-    Sleeper::Type().SetLoadFactor(12.5);
-    SecondSitting::Type().SetLoadFactor(12.5);
-
-    EXPECT_FLOAT_EQ(ACFirstClass::Type().GetLoadFactor(), 12.5);
-    EXPECT_FLOAT_EQ(AC2Tier::Type().GetLoadFactor(), 12.5);
-    EXPECT_FLOAT_EQ(FirstClass::Type().GetLoadFactor(), 12.5);
-    EXPECT_FLOAT_EQ(AC3Tier::Type().GetLoadFactor(), 12.5);
-    EXPECT_FLOAT_EQ(ACChairCar::Type().GetLoadFactor(), 12.5);
-    EXPECT_FLOAT_EQ(Sleeper::Type().GetLoadFactor(), 12.5);
-    EXPECT_FLOAT_EQ(SecondSitting::Type().GetLoadFactor(), 12.5);
-}
