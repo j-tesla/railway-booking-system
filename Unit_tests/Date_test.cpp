@@ -1,6 +1,9 @@
-//
-// Created by Jayanth PSY (19CS10068) on 06/03/21.
-//
+/**
+ * @file Date_test.cpp
+ * @brief contains unit tests of Date class
+ * @author Jayanth PSY - 19CS10068
+ */
+
 
 #include <sstream>
 
@@ -9,7 +12,7 @@
 #include "Date.h"
 
 
-/**
+/** \test
  * checks ostream << overload output
  */
 TEST(Date_test, OstreamCheck) {

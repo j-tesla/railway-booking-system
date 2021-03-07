@@ -1,6 +1,10 @@
-//
-// Created by Jayanth PSY (19CS10068) on 03/03/21.
-//
+/**
+ * @file Railways.cpp
+ * @brief contains implementations and declarations of Railways class
+ * @author Jayanth PSY - 19CS10068
+ */
+
+
 #include "Railways.h"
 
 
@@ -48,6 +52,10 @@ const std::set<Station> Railways::sStations = IndianRailwayStations();
 
 const std::map<std::pair<const Station, const Station>, unsigned> Railways::sDistances = IndianRailwayStationDistances();
 
+/**
+ * Meyer's singleton Railways
+ * @return reference to singleton object
+ */
 const Railways &Railways::IndianRailways() {
     static Railways theRailways;
     return theRailways;

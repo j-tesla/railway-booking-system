@@ -1,6 +1,8 @@
-//
-// Created by Jayanth PSY (19CS10068) on 03/03/21.
-//
+/**
+ * @file Passenger.h
+ * @brief contains of Passenger class
+ * @author Jayanth PSY - 19CS10068
+ */
 
 #ifndef RAILWAYBOOKINGSYSTEM_PASSENGER_H
 #define RAILWAYBOOKINGSYSTEM_PASSENGER_H

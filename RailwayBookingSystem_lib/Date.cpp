@@ -1,6 +1,8 @@
-//
-// Created by Jayanth PSY (19CS10068) on 02/03/21.
-//
+/**
+ * @file Date.cpp
+ * @brief contains implementations and declarations of Date class
+ * @author Jayanth PSY - 19CS10068
+ */
 
 #include "Date.h"
 

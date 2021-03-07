@@ -1,6 +1,9 @@
-//
-// Created by Jayanth PSY (19CS10068) on 02/03/21.
-//
+/**
+ * @file BookingClass.h
+ * @brief contains abstract class BookingClass and base classes
+ * @author Jayanth PSY - 19CS10068
+ */
+
 
 #ifndef RAILWAYBOOKINGSYSTEM_BOOKINGCLASS_H
 #define RAILWAYBOOKINGSYSTEM_BOOKINGCLASS_H
@@ -91,7 +94,7 @@ class ACFirstClass : public BerthClass {
     static const bool sIsLuxury;        //!< needs initiate in application
 
 public:
-    static const BookingClass &Type();
+    static const BookingClass &Type(); //!< Returns Type Constant
 
     string GetName() const override;
 
@@ -110,7 +113,7 @@ class AC2Tier : public BerthClass {
     static const bool sIsLuxury;        //!< needs initiate in application
 
 public:
-    static const BookingClass &Type();
+    static const BookingClass &Type(); //!< Returns Type Constant
 
     string GetName() const override;
 
@@ -129,7 +132,7 @@ class FirstClass : public BerthClass {
     static const bool sIsLuxury;        //!< needs initiate in application
 
 public:
-    static const BookingClass &Type();
+    static const BookingClass &Type(); //!< Returns Type Constant
 
     string GetName() const override;
 
@@ -148,7 +151,7 @@ class AC3Tier : public BerthClass {
     static const bool sIsLuxury;        //!< needs initiate in application
 
 public:
-    static const BookingClass &Type();
+    static const BookingClass &Type(); //!< Returns Type Constant
 
     string GetName() const override;
 
@@ -168,7 +171,7 @@ class ACChairCar : public SeatClass {
 
 public:
     // needs initiate in application
-    static const BookingClass &Type();
+    static const BookingClass &Type(); //!< Returns Type Constant
 
     string GetName() const override;
 
@@ -182,12 +185,12 @@ public:
 
 };
 
-class Sleeper : public SeatClass {
+class Sleeper : public BerthClass {
     static const float sLoadFactor;     //!< needs initiate in application
     static const bool sIsLuxury;        //!< needs initiate in application
 
 public:
-    static const BookingClass &Type();
+    static const BookingClass &Type(); //!< Returns Type Constant
 
     string GetName() const override;
 
@@ -206,7 +209,7 @@ class SecondSitting : public SeatClass {
     static const bool sIsLuxury;        //!< needs initiate in application
 
 public:
-    static const BookingClass &Type();
+    static const BookingClass &Type(); //!< Type Constant
 
     string GetName() const override;
 

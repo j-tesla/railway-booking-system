@@ -1,6 +1,8 @@
-//
-// Created by Jayanth PSY (19CS10068) on 06/03/21.
-//
+/**
+ * @file Main.cpp
+ * @brief runs all the unit tests
+ * @author Jayanth PSY - 19CS10068
+ */
 
 #include <iostream>
 

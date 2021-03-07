@@ -1,6 +1,9 @@
-//
-// Created by Jayanth PSY (19CS10068) on 02/03/21.
-//
+/**
+ * @file Station.cpp
+ * @brief contains implementations and declarations of Station class
+ * @author Jayanth PSY - 19CS10068
+ */
+
 
 #include "Station.h"
 

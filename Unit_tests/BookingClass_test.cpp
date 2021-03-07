@@ -1,6 +1,8 @@
-//
-// Created by Jayanth PSY (19CS10068) on 03/03/21.
-//
+/**
+ * @file BookingClasses_test.cpp
+ * @brief contains unit tests of base classes in BookingClass.h
+ * @author Jayanth PSY - 19CS10068
+ */
 
 
 #include <sstream>
@@ -11,7 +13,7 @@
 #include "BookingClass.h"
 
 
-/**
+/** \test
  * checks names of the classes
  */
 TEST(BookingClasses_test, NameCheck) {
@@ -24,7 +26,7 @@ TEST(BookingClasses_test, NameCheck) {
     EXPECT_EQ(SecondSitting::Type().GetName(), "Second Sitting");
 }
 
-/**
+/** \test
  * checks Ac property of classes
  */
 TEST(BookingClasses_test, IsACCheck) {
@@ -37,7 +39,20 @@ TEST(BookingClasses_test, IsACCheck) {
     EXPECT_EQ(SecondSitting::Type().IsAc(), false);
 }
 
-/**
+/** \test
+ * checks Ac property of classes
+ */
+TEST(BookingClasses_test, IsSittingCheck) {
+    EXPECT_EQ(ACFirstClass::Type().IsSitting(), false);
+    EXPECT_EQ(AC2Tier::Type().IsSitting(), false);
+    EXPECT_EQ(FirstClass::Type().IsSitting(), false);
+    EXPECT_EQ(AC3Tier::Type().IsSitting(), false);
+    EXPECT_EQ(ACChairCar::Type().IsSitting(), true);
+    EXPECT_EQ(Sleeper::Type().IsSitting(), false);
+    EXPECT_EQ(SecondSitting::Type().IsSitting(), true);
+}
+
+/** \test
  * checks luxury status of classes
  * depends on initialised const values
  */
@@ -51,7 +66,7 @@ TEST(BookingClasses_test, IsLuxuryCheck) {
     EXPECT_EQ(SecondSitting::Type().IsLuxury(), false);
 }
 
-/**
+/** \test
  * checks number of tiers of classes
  */
 TEST(BookingClasses_test, NumberOfTiersCheck) {
@@ -64,7 +79,7 @@ TEST(BookingClasses_test, NumberOfTiersCheck) {
     EXPECT_EQ(SecondSitting::Type().GetNumberOfTiers(), 0);
 }
 
-/**
+/** \test
  * checks load factor
  * depends on initialised const values
  */
@@ -78,7 +93,7 @@ TEST(BookingClasses_test, LoadFactorCheck) {
     EXPECT_FLOAT_EQ(SecondSitting::Type().GetLoadFactor(), 0.50);
 }
 
-/**
+/** \test
  * checks format of ostream << overload output
  */
 TEST(BookingClasses_test, OstreamFormatCheck) {

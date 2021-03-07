@@ -1,6 +1,9 @@
-//
-// Created by Jayanth PSY (19CS10068) on 03/03/21.
-//
+/**
+ * @file Railways.h
+ * @brief contains Railways class
+ * @author Jayanth PSY - 19CS10068
+ */
+
 
 #ifndef RAILWAYBOOKINGSYSTEM_RAILWAYS_H
 #define RAILWAYBOOKINGSYSTEM_RAILWAYS_H

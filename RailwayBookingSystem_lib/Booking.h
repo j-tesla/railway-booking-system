@@ -1,6 +1,8 @@
-//
-// Created by Jayanth PSY (19CS10068) on 03/03/21.
-//
+/**
+ * @file Booking.h
+ * @brief contains BookingCase and Booking classes
+ * @author Jayanth PSY - 19CS10068
+ */
 
 #ifndef RAILWAYBOOKINGSYSTEM_BOOKING_H
 #define RAILWAYBOOKINGSYSTEM_BOOKING_H

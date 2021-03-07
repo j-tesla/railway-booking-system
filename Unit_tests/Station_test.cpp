@@ -1,13 +1,16 @@
-//
-// Created by Jayanth PSY (19CS10068) on 02/03/21.
-//
+/**
+ * @file Station_test.cpp
+ * @brief contains unit tests of Station class
+ * @author Jayanth PSY - 19CS10068
+ */
+
 
 #include "gtest/gtest.h"
 
 #include "Station.h"
 
 
-/**
+/** \test
  * tests whether name is saved properly
  */
 TEST(Station_test, NameCheck) {
@@ -15,7 +18,7 @@ TEST(Station_test, NameCheck) {
     EXPECT_EQ(kolkata.GetName(), "Kolkata");
 }
 
-/**
+/** \test
  * checks equality of two objects
  */
 TEST(Station_test, EqualityCheck) {

@@ -1,6 +1,9 @@
-//
-// Created by Jayanth PSY (19CS10068) on 02/03/21.
-//
+/**
+ * @file Date.h
+ * @brief contains Date class
+ * @author Jayanth PSY - 19CS10068
+ */
+
 
 #ifndef RAILWAYBOOKINGSYSTEM_DATE_H
 #define RAILWAYBOOKINGSYSTEM_DATE_H

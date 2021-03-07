@@ -11,4 +11,7 @@ add_subdirectory(RailwayBookingSystem_lib)
 add_executable(RailwayBookingSystem_testApplication TestApplication.cpp)
 target_link_libraries(RailwayBookingSystem_testApplication RailwayBookingSystem_lib)
 
+add_executable(RailwayBookingSystem_testApplication1 TestApplication_extended.cpp)
+target_link_libraries(RailwayBookingSystem_testApplication1 RailwayBookingSystem_lib)
+
 add_subdirectory(Unit_tests)

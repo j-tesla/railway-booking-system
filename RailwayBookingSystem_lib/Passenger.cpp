@@ -1,6 +1,8 @@
-//
-// Created by Jayanth PSY (19CS10068) on 03/03/21.
-//
+/**
+ * @file Passenger.cpp
+ * @brief contains implementations and declarations of Passenger class
+ * @author Jayanth PSY - 19CS10068
+ */
 
 #include "Passenger.h"
 

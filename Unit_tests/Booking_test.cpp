@@ -1,6 +1,9 @@
-//
-// Created by Jayanth PSY (19CS10068) on 04/03/21.
-//
+/**
+ * @file Booking_test.cpp
+ * @brief contains unit tests of Booking class
+ * @author Jayanth PSY - 19CS10068
+ */
+
 
 #include <sstream>
 
@@ -10,7 +13,7 @@
 #include "Booking.h"
 
 
-/**
+/** \class test fixture
  * fixture for Booking_test test suite
  */
 class Booking_test : public ::testing::Test {
@@ -39,7 +42,7 @@ const Booking *Booking_test::b1_ = nullptr;
 const Booking *Booking_test::b2 = nullptr;
 
 
-/**
+/** \test
  * checks PNR sequence
  */
 TEST_F(Booking_test, PNRSequenceCheck) {
@@ -48,14 +51,14 @@ TEST_F(Booking_test, PNRSequenceCheck) {
     EXPECT_EQ(b2->GetPNR(), 3);
 }
 
-/**
+/** \test
  * checks fare's independence of date
  */
 TEST_F(Booking_test, DateIndependanceCheck) {
     EXPECT_EQ(b1->ComputeFare(), b1_->ComputeFare());
 }
 
-/**
+/** \test
  * checks number of bookings active
  */
 TEST_F(Booking_test, BookingsCheck) {
@@ -67,7 +70,7 @@ TEST_F(Booking_test, BookingsCheck) {
     EXPECT_EQ(Booking::GetBookings().size(), 3);        // 4 - 1 bookings (last booking went out of scope)
 }
 
-/**
+/** \test
  * checks whether booking status is always true
  */
 TEST_F(Booking_test, BookingStatusCheck) {
@@ -76,7 +79,7 @@ TEST_F(Booking_test, BookingStatusCheck) {
     EXPECT_EQ(b2->GetBookingStatus(), true);
 }
 
-/**
+/** \test
  * checks booking classes
  */
 TEST_F(Booking_test, BookingClassCheck) {
@@ -85,7 +88,7 @@ TEST_F(Booking_test, BookingClassCheck) {
     EXPECT_EQ(b2->GetBookingClass(), Sleeper::Type());
 }
 
-/**
+/** \test
  * checks to stations
  */
 TEST_F(Booking_test, ToStationCheck) {
@@ -94,7 +97,7 @@ TEST_F(Booking_test, ToStationCheck) {
     EXPECT_EQ(b2->GetToStation(), Station("Chennai"));
 }
 
-/**
+/** \test
  * checks from stations
  */
 TEST_F(Booking_test, FromStationCheck) {
@@ -103,7 +106,7 @@ TEST_F(Booking_test, FromStationCheck) {
     EXPECT_EQ(b2->GetFromStation(), Station("Kolkata"));
 }
 
-/**
+/** \test
  * checks for passenger being null
  */
 TEST_F(Booking_test, NullPassengerCheck) {
@@ -112,7 +115,7 @@ TEST_F(Booking_test, NullPassengerCheck) {
     EXPECT_EQ(b2->GetPassenger(), nullptr);
 }
 
-/**
+/** \test
  * checks dates
  */
 TEST_F(Booking_test, DateCheck) {
@@ -121,7 +124,7 @@ TEST_F(Booking_test, DateCheck) {
     EXPECT_EQ(b2->GetDate(), Date(6, 5, 2021));
 }
 
-/**
+/** \test
  * checks fares
  * depends on initialised const values
  */
@@ -130,7 +133,7 @@ TEST_F(Booking_test, FareCheck) {
     EXPECT_EQ(b2->ComputeFare(), 830);
 }
 
-/**
+/** \test
  * checks format of ostream << overload
  */
 TEST_F(Booking_test, OstreamFormatCheck) {

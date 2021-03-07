@@ -1,6 +1,9 @@
-//
-// Created by Jayanth PSY (19CS10068) on 02/03/21.
-//
+/**
+ * @file Station.h
+ * @brief contains Station class
+ * @author Jayanth PSY - 19CS10068
+ */
+
 
 #ifndef RAILWAYBOOKINGSYSTEM_STATION_H
 #define RAILWAYBOOKINGSYSTEM_STATION_H

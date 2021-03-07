@@ -1,13 +1,16 @@
-//
-// Created by Jayanth PSY (19CS10068) on 03/03/21.
-//
+/**
+ * @file Railways_test.cpp
+ * @brief contains unit tests of Railways class
+ * @author Jayanth PSY - 19CS10068
+ */
+
 
 #include "gtest/gtest.h"
 
 #include "Railways.h"
 
 
-/**
+/** \test
  * checks whether distance between stations is symmetric
  */
 TEST(Railways_test, DistanceSymmetry) {
