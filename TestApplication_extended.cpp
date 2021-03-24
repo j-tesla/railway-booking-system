@@ -36,6 +36,9 @@ void BookingApplication() {
     Booking b2(Station("Kolkata"), Station("Delhi"), Date(5, 3, 2021), AC2Tier::Type());
     Booking b3(Station("Mumbai"), Station("Delhi"), Date(23, 3, 2021), AC3Tier::Type());
 
+    {
+        Booking bTemp(Station("Chennai"), Station("Delhi"), Date(15, 2, 2021), ACFirstClass::Type());
+    }
     // different booking classes
     Booking b4(Station("Chennai"), Station("Kolkata"), Date(25, 4, 2021), ACChairCar::Type());
     Booking b5(Station("Chennai"), Station("Kolkata"), Date(7, 5, 2021), Sleeper::Type());

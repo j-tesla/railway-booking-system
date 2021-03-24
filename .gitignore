@@ -1,12 +1,13 @@
-# Created by .ignore support plugin (hsz.mobi)
-### Example user template template
-### Example user template
+# Doxygen
+Doxyfile
+Doxygen docs/
 
 # IntelliJ project files
 .idea
 *.iml
 out
 gen
+
 ### CMake template
 cmake-build-debug
 cmake-build-release
@@ -24,7 +25,7 @@ compile_commands.json
 CTestTestfile.cmake
 _deps
 
-### C++ template
+### C/C++ template
 # Prerequisites
 *.d
 
@@ -33,15 +34,12 @@ _deps
 *.lo
 *.o
 *.obj
+*.ko
+*.elf
 
 # Precompiled Headers
 *.gch
 *.pch
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
 
 # Fortran module files
 *.mod
@@ -53,35 +51,10 @@ _deps
 *.a
 *.lib
 
-# Executables
-*.exe
-*.out
-*.app
-
-### C template
-# Prerequisites
-*.d
-
-# Object files
-*.o
-*.ko
-*.obj
-*.elf
-
 # Linker output
 *.ilk
 *.map
 *.exp
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
 
 # Shared objects (inc. Windows DLLs)
 *.dll
