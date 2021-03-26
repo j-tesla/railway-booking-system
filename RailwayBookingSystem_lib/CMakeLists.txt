@@ -9,7 +9,8 @@ set(HEADER_FILES
         Railways.h
         BookingClass.h
         Passenger.h
-        Booking.h)
+        Booking.h
+        Exceptions.h)
 
 set(SOURCE_FILES
         Date.cpp
@@ -17,7 +18,8 @@ set(SOURCE_FILES
         Railways.cpp
         BookingClass.cpp
         Passenger.cpp
-        Booking.cpp)
+        Booking.cpp
+        Exceptions.cpp)
 
 add_library(RailwayBookingSystem_lib STATIC ${SOURCE_FILES} ${HEADER_FILES})
 

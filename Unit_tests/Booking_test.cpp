@@ -20,9 +20,9 @@ class Booking_test : public ::testing::Test {
 protected:
     // setup code for the test suite
     static void SetUpTestSuite() {
-        b1 = new Booking(Station("Mumbai"), Station("Chennai"), Date(5, 5, 2021), ACChairCar::Type());
-        b1_ = new Booking(Station("Mumbai"), Station("Chennai"), Date(5, 6, 2020), ACChairCar::Type());
-        b2 = new Booking(Station("Kolkata"), Station("Chennai"), Date(6, 5, 2021), Sleeper::Type());
+        b1 = new Booking(Station("Mumbai"), Station("Chennai"), Date::Construct(5, 5, 2021), ACChairCar::Type());
+        b1_ = new Booking(Station("Mumbai"), Station("Chennai"), Date::Construct(5, 6, 2020), ACChairCar::Type());
+        b2 = new Booking(Station("Kolkata"), Station("Chennai"), Date::Construct(6, 5, 2021), Sleeper::Type());
     }
 
     static void TearDownTestSuite() {
@@ -64,7 +64,7 @@ TEST_F(Booking_test, DateIndependanceCheck) {
 TEST_F(Booking_test, BookingsCheck) {
     EXPECT_EQ(Booking::GetBookings().size(), 3);        // 3 bookings in Fixture
     {
-        Booking bx(Station("Chennai"), Station("Delhi"), Date(2, 1, 2022), AC2Tier::Type());
+        Booking bx(Station("Chennai"), Station("Delhi"), Date::Construct(2, 1, 2022), AC2Tier::Type());
         EXPECT_EQ(Booking::GetBookings().size(), 4);        // 3 + 1 bookings
     }
     EXPECT_EQ(Booking::GetBookings().size(), 3);        // 4 - 1 bookings (last booking went out of scope)
@@ -119,9 +119,9 @@ TEST_F(Booking_test, NullPassengerCheck) {
  * checks dates
  */
 TEST_F(Booking_test, DateCheck) {
-    EXPECT_EQ(b1->GetDate(), Date(5, 5, 2021));
-    EXPECT_EQ(b1_->GetDate(), Date(5, 6, 2020));
-    EXPECT_EQ(b2->GetDate(), Date(6, 5, 2021));
+    EXPECT_EQ(b1->GetDate(), Date::Construct(5, 5, 2021));
+    EXPECT_EQ(b1_->GetDate(), Date::Construct(5, 6, 2020));
+    EXPECT_EQ(b2->GetDate(), Date::Construct(6, 5, 2021));
 }
 
 /** \test
