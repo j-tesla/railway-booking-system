@@ -32,16 +32,14 @@ std::map<unsigned short, string> MonthNames() {
 
 const std::map<Date::Month, string> Date::sMonthNames = MonthNames();
 
-bool Date::operator==(const Date &other) const {
-    return day_ == other.day_ and month_ == other.month_ and year_ == other.year_;
-}
-
-std::ostream &operator<<(std::ostream &os, const Date &date) {
-    os << date.day_ << "/" << Date::sMonthNames.at(date.month_) << "/" << date.year_;
-    return os;
-}
 
 Date Date::Construct(Date::Day day, Date::Month month, Date::Year year) noexcept(false) {
+    if ((year < 1900) or (year > 2099)) {
+        throw Bad_Date("Bad Date: Invalid year, 1900 - 2099 are valid");
+    }
+    if ((month < 1) or (month > 12)) {
+        throw Bad_Date("Bad Date: Invalid month, 1 - 12 are valid");
+    }
     if (((month == 1 or month == 3 or month == 5 or month == 7 or
           month == 8 or month == 10 or month == 12)
          and (day > 31 or day < 1)) or
@@ -50,12 +48,8 @@ Date Date::Construct(Date::Day day, Date::Month month, Date::Year year) noexcept
         ((month == 2) and (year % 4 == 0) and (day > 29 or day < 1)) or
         ((month == 2) and (year % 4 != 0) and (day > 28 or day < 1))) {
         throw Bad_Date("Bad Date: Invalid day");
-    } else if ((year < 1900) or (year > 2099)) {
-        throw Bad_Date("Bad Date: Invalid year, 1900 - 2099 are valid");
     }
-    if ((month < 1) or (month > 12)) {
-        throw Bad_Date("Bad Date: Invalid month, 1 - 12 are valid");
-    }
+
     return Date(day, month, year);
 }
 

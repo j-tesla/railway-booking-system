@@ -8,11 +8,12 @@
 #include <sstream>
 
 #include "gtest/gtest.h"
+#include "gmock/gmock.h"
 
 #include "Date.h"
 
 /** \test
- * checks equality operator
+ * positive test: checks equality operator
  */
 TEST(Date_test, EqualityOperatorCheck) {
     Date d1 = Date::Construct(1, 1, 1999);
@@ -22,20 +23,20 @@ TEST(Date_test, EqualityOperatorCheck) {
 }
 
 /** \test
- * check construction for valid dates
+ * positive test: check construction for valid dates
  */
 TEST(Date_test, ConstructionFromStringCheck) {
     Date d1 = Date::Construct(10, 5, 2000);
     Date d1_ = Date::Construct("10/05/2000");
     EXPECT_EQ(d1, d1_);
 
-    Date d2  = Date::Construct(22, 2, 1888);
-    Date d2_ = Date::Construct("22/FEB/1888");
+    Date d2 = Date::Construct(22, 2, 1996);
+    Date d2_ = Date::Construct("22/FEB/1996");
     EXPECT_EQ(d2, d2_);
 }
 
 /** \test
- * checks whether date construction throws correct exception when day is greater than 31
+ * negative test: checks whether date construction throws correct exception when day is greater than 31
  */
 TEST(Date_test, DaysAfter31InvalidityCheck) {
     try {
@@ -49,7 +50,7 @@ TEST(Date_test, DaysAfter31InvalidityCheck) {
 }
 
 /** \test
- * checks whether date construction throws correct exception when day is greater than 30 in months like April
+ * negative test: checks whether date construction throws correct exception when day is greater than 30 in months like April
  */
 TEST(Date_test, DaysAfter30InvalidityCheck) {
     try {
@@ -63,7 +64,7 @@ TEST(Date_test, DaysAfter30InvalidityCheck) {
 }
 
 /**
- * checks validity of 29 Feb if leap year or otherwise
+ * negative test: checks validity of 29 Feb if leap year or otherwise
  */
 TEST(Date_test, February29Check) {
     try {
@@ -83,14 +84,14 @@ TEST(Date_test, February29Check) {
 }
 
 /** \test
- * checks whether construction throws correct exception when month is invalid
+ * negative test: checks whether construction throws correct exception when month is invalid
  */
 TEST(Date_test, InvalidMonthCheck) {
     try {
-        Date::Construct(10, 16, 2222);
+        Date::Construct(10, 16, 2022);
         FAIL() << "Failed to throw required exception\n";
     } catch (const Bad_Date &e) {
-        EXPECT_STREQ(e.what(), "Bad Date: Invalid month");
+        EXPECT_THAT(e.what(), testing::StartsWith("Bad Date: Invalid month"));
     } catch (...) {
         FAIL() << "Unexpected exception thrown\n";
     }
@@ -99,7 +100,7 @@ TEST(Date_test, InvalidMonthCheck) {
         Date::Construct("05/20/2000");
         FAIL() << "Failed to throw required exception\n";
     } catch (const Bad_Date &e) {
-        EXPECT_STREQ(e.what(), "Bad Date: Invalid month");
+        EXPECT_THAT(e.what(), testing::StartsWith("Bad Date: Invalid month"));
     } catch (...) {
         FAIL() << "Unexpected exception thrown\n";
     }
@@ -115,7 +116,7 @@ TEST(Date_test, InvalidMonthCheck) {
 }
 
 /** \test
- * checks whether construction throws correct exception when month is invalid
+ * negative test: checks whether construction throws correct exception when month is invalid
  */
 TEST(Date_test, DateFormatCheck) {
     try {
@@ -129,7 +130,7 @@ TEST(Date_test, DateFormatCheck) {
 }
 
 /** \test
- * checks ostream << overload output
+ * positive test: checks ostream << overload output
  */
 TEST(Date_test, OstreamCheck) {
     Date d1 = Date::Construct(5, 5, 2025);

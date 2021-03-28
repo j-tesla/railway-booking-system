@@ -30,6 +30,7 @@ private:
     const Year year_;
 
     Date(Day day, Month month, Year year) noexcept;
+
 public:
 
     ~Date() noexcept;
@@ -53,11 +54,16 @@ public:
      * @param date string in formats dd/mm/yyyy or dd/MMM/yyyy
      * @return constructed Date object
      */
-    static Date Construct(const string& date) noexcept(false);
+    static Date Construct(const string &date) noexcept(false);
 
-    bool operator==(const Date &other) const;
+    inline bool operator==(const Date &other) const {
+        return day_ == other.day_ and month_ == other.month_ and year_ == other.year_;
+    };
 
-    friend std::ostream &operator<<(std::ostream &os, const Date &date);
+    friend inline std::ostream &operator<<(std::ostream &os, const Date &date) {
+        os << date.day_ << "/" << Date::sMonthNames.at(date.month_) << "/" << date.year_;
+        return os;
+    };
 
 };
 
