@@ -16,13 +16,13 @@
  * Exception for invalid dates
  */
 class Bad_Date : public std::exception {
-    const char *const cause;
+    const char *const cause_;
 
 public:
 
     Bad_Date() noexcept;
 
-    Bad_Date(const char *cause) noexcept;
+    explicit Bad_Date(const char *cause) noexcept;
 
     Bad_Date(const Bad_Date &other) noexcept;
 

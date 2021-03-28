@@ -127,9 +127,9 @@ public:
  * Booking from anywhere to anywhere on any date is always available
  */
 class Booking : public BookingBase {
-    static const float sBaseFareRate;        //!< needs initiate in application
-    static const float sACSurcharge;        //!< needs initiate in application
-    static const float sLuxuryTaxPercent;       //!< needs initiate in application
+    static const float sBaseFareRate;        //! needs initiate in application
+    static const float sACSurcharge;        //! needs initiate in application
+    static const float sLuxuryTaxPercent;       //! needs initiate in application
 
 public:
     /**

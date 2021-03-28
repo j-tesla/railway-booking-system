@@ -14,7 +14,7 @@
 using std::string;
 
 class Station {
-    const string name_; //!< name of the station
+    const string name_;        //! name of the station
 
 public:
     /**

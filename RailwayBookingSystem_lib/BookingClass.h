@@ -90,11 +90,11 @@ public:
 };
 
 class ACFirstClass : public BerthClass {
-    static const float sLoadFactor;     //!< needs initiate in application
-    static const bool sIsLuxury;        //!< needs initiate in application
+    static const float sLoadFactor;        //! needs initiate in application
+    static const bool sIsLuxury;        //! needs initiate in application
 
 public:
-    static const BookingClass &Type(); //!< Returns Type Constant
+    static const BookingClass &Type();        //! Returns Type Constant
 
     string GetName() const override;
 
@@ -109,11 +109,11 @@ public:
 };
 
 class AC2Tier : public BerthClass {
-    static const float sLoadFactor;     //!< needs initiate in application
-    static const bool sIsLuxury;        //!< needs initiate in application
+    static const float sLoadFactor;        //! needs initiate in application
+    static const bool sIsLuxury;        //! needs initiate in application
 
 public:
-    static const BookingClass &Type(); //!< Returns Type Constant
+    static const BookingClass &Type();        //! Returns Type Constant
 
     string GetName() const override;
 
@@ -128,11 +128,11 @@ public:
 };
 
 class FirstClass : public BerthClass {
-    static const float sLoadFactor;     //!< needs initiate in application
-    static const bool sIsLuxury;        //!< needs initiate in application
+    static const float sLoadFactor;        //! needs initiate in application
+    static const bool sIsLuxury;        //! needs initiate in application
 
 public:
-    static const BookingClass &Type(); //!< Returns Type Constant
+    static const BookingClass &Type();        //! Returns Type Constant
 
     string GetName() const override;
 
@@ -147,11 +147,11 @@ public:
 };
 
 class AC3Tier : public BerthClass {
-    static const float sLoadFactor;     //!< needs initiate in application
-    static const bool sIsLuxury;        //!< needs initiate in application
+    static const float sLoadFactor;        //! needs initiate in application
+    static const bool sIsLuxury;        //! needs initiate in application
 
 public:
-    static const BookingClass &Type(); //!< Returns Type Constant
+    static const BookingClass &Type();        //! Returns Type Constant
 
     string GetName() const override;
 
@@ -166,12 +166,12 @@ public:
 };
 
 class ACChairCar : public SeatClass {
-    static const float sLoadFactor;     //!< needs initiate in application
-    static const bool sIsLuxury;        //!< needs initiate in application
+    static const float sLoadFactor;        //! needs initiate in application
+    static const bool sIsLuxury;        //! needs initiate in application
 
 public:
     // needs initiate in application
-    static const BookingClass &Type(); //!< Returns Type Constant
+    static const BookingClass &Type();        //! Returns Type Constant
 
     string GetName() const override;
 
@@ -186,11 +186,11 @@ public:
 };
 
 class Sleeper : public BerthClass {
-    static const float sLoadFactor;     //!< needs initiate in application
-    static const bool sIsLuxury;        //!< needs initiate in application
+    static const float sLoadFactor;        //! needs initiate in application
+    static const bool sIsLuxury;        //! needs initiate in application
 
 public:
-    static const BookingClass &Type(); //!< Returns Type Constant
+    static const BookingClass &Type();        //! Returns Type Constant
 
     string GetName() const override;
 
@@ -205,11 +205,11 @@ public:
 };
 
 class SecondSitting : public SeatClass {
-    static const float sLoadFactor;     //!< needs initiate in application
-    static const bool sIsLuxury;        //!< needs initiate in application
+    static const float sLoadFactor;        //! needs initiate in application
+    static const bool sIsLuxury;        //! needs initiate in application
 
 public:
-    static const BookingClass &Type(); //!< Type Constant
+    static const BookingClass &Type();        //! Type Constant
 
     string GetName() const override;
 

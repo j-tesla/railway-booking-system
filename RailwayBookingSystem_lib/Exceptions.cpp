@@ -7,24 +7,24 @@
 #include "Exceptions.h"
 
 
-Bad_Date::Bad_Date() noexcept: std::exception(), cause(strdup("Bad Date")) {
+Bad_Date::Bad_Date() noexcept: std::exception(), cause_(strdup("Bad Date")) {
 }
 
-Bad_Date::Bad_Date(const char *cause) noexcept: std::exception(), cause(strdup(cause)) {
+Bad_Date::Bad_Date(const char *cause) noexcept: std::exception(), cause_(strdup(cause)) {
 
 }
 
-Bad_Date::Bad_Date(const Bad_Date &other) noexcept: std::exception(), cause(strdup(other.cause)) {
+Bad_Date::Bad_Date(const Bad_Date &other) noexcept: std::exception(), cause_(strdup(other.cause_)) {
 
 }
 
 const char *Bad_Date::what() const noexcept {
 
-    return cause;
+    return cause_;
 }
 
 Bad_Date::~Bad_Date() noexcept {
-    delete cause;
+    delete cause_;
 }
 
 
