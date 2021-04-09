@@ -8,6 +8,11 @@
 #ifndef RAILWAYBOOKINGSYSTEM_BOOKINGCLASSES_H
 #define RAILWAYBOOKINGSYSTEM_BOOKINGCLASSES_H
 
+#include <ostream>
+#include <string>
+using std::string;
+
+
 template<typename T>
 class BookingClassTypes;      //! Forward declaration of templatized class
 
@@ -64,11 +69,13 @@ protected:
     virtual ~BookingClass();
 
 public:
+    virtual const string &GetName() const = 0;
+
     virtual float GetFareLoadFactor() const = 0;
 
     virtual float GetReservationCharge() const = 0;
 
-    virtual bool IsSeating() const = 0;
+    virtual bool IsSitting() const = 0;
 
     virtual bool IsAC() const = 0;
 
@@ -92,6 +99,8 @@ public:
 
     virtual float GetTBPatientsConcessionFactor() const = 0;
 
+    friend std::ostream &operator<<(std::ostream &os, const BookingClass &aClass);
+
     using ACFirstClass = BookingClassTypes<ACFirstClassType>;
     using ExecutiveChairCar = BookingClassTypes<ExecutiveChairCarType>;
     using AC2Tier = BookingClassTypes<AC2TierType>;
@@ -104,6 +113,7 @@ public:
 
 template<typename T>
 class BookingClassTypes : public BookingClass {
+    static const string sName;
     static const bool sIsSeating;
     static const bool sIsAC;
     static const unsigned sNumberOfTiers;
@@ -127,11 +137,13 @@ public:
 
     static const BookingClass &Type();
 
+    const string &GetName() const override;
+
     float GetFareLoadFactor() const override;
 
     float GetReservationCharge() const override;
 
-    bool IsSeating() const override;
+    bool IsSitting() const override;
 
     bool IsAC() const override;
 
@@ -179,7 +191,7 @@ float BookingClassTypes<T>::GetReservationCharge() const {
 }
 
 template<typename T>
-bool BookingClassTypes<T>::IsSeating() const {
+bool BookingClassTypes<T>::IsSitting() const {
     return sIsSeating;
 }
 
@@ -236,6 +248,11 @@ float BookingClassTypes<T>::GetCancerPatientsConcessionFactor() const {
 template<typename T>
 float BookingClassTypes<T>::GetTBPatientsConcessionFactor() const {
     return sTBPatientsConcessionFactor;
+}
+
+template<typename T>
+const string &BookingClassTypes<T>::GetName() const {
+    return sName;
 }
 
 template<typename T>

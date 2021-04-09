@@ -72,7 +72,7 @@ std::ostream &operator<<(std::ostream &os, const BookingBase &booking) {
     os << "From Station = " << booking.fromStation_.GetName() << "\n";
     os << "To Station = " << booking.toStation_.GetName() << "\n";
     os << "Travel Date = " << booking.dateOfBooking_ << "\n";
-//    os << "Travel Class = " << booking.bookingClass_ << "\n"; todo
+    os << "Travel Class = " << booking.bookingClass_ << "\n";
     os << "Fare = " << booking.ComputeFare() << "\n";
     return os;
 }
