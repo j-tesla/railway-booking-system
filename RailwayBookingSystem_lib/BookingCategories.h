@@ -5,16 +5,23 @@
 #ifndef RAILWAYBOOKINGSYSTEM_BOOKINGCATEGORIES_H
 #define RAILWAYBOOKINGSYSTEM_BOOKINGCATEGORIES_H
 
+
+#include <string>
+#include <ostream>
+
+
+using std::string;
+
 #include "Date.h"
 #include "Passenger.h"
 #include "BookingClasses.h"
 
 
 class BookingCategory {
-//    static const float sConcessionFactor;
+    const string name_;
 
 protected:
-    BookingCategory();
+    BookingCategory(string name);
 
     virtual ~BookingCategory() noexcept;
 
@@ -26,9 +33,14 @@ public:
     virtual bool
     IsEligible(const Passenger &passenger, const Date &dateOfBooking, const Date &dateOfReservation) const = 0;
 
+    const string &GetName() const;
+
+    friend std::ostream &operator<<(std::ostream &os, const BookingCategory &category);
+
 };
 
 class General : public BookingCategory {
+    static const string sName;
     General();
 
 public:
@@ -46,7 +58,7 @@ public:
 
 class Concession : public BookingCategory {
 protected:
-    Concession();
+    Concession(const string &name);
 
     ~Concession() noexcept override;
 
@@ -55,6 +67,7 @@ protected:
 };
 
 class Ladies : public Concession {
+    static const string sName;
     static const float sConcessionFactor;       //! initiate in application code
 
 public:
@@ -73,6 +86,7 @@ public:
 };
 
 class SeniorCitizen : public Concession {
+    static const string sName;
     static const float sMaleConcessionFactor;
     static const float sFemaleConcessionFactor;
 
@@ -93,7 +107,7 @@ public:
 
 class Priority : public BookingCategory {
 protected:
-    Priority();
+    Priority(const string &name);
 
     ~Priority() noexcept override;
 
@@ -105,6 +119,7 @@ public:
 };
 
 class Tatkal : public Priority {
+    static const string sName;
     Tatkal();
 
 public:
@@ -118,6 +133,7 @@ public:
 };
 
 class PremiumTatkal : public Priority {
+    static const string sName;
     PremiumTatkal();
 
 public:
@@ -129,6 +145,7 @@ public:
 
 template<typename D>
 class DivyaangCategory : public Concession {
+    static const string sName;
 protected:
     DivyaangCategory();
 
@@ -145,8 +162,12 @@ public:
     static const BookingCategory &Type();
 };
 
+
 template<typename D>
-DivyaangCategory<D>::DivyaangCategory(): Concession() {
+const string DivyaangCategory<D>::sName = "Divyaang";
+
+template<typename D>
+DivyaangCategory<D>::DivyaangCategory(): Concession(sName) {
 }
 
 template<typename D>

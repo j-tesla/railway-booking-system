@@ -4,13 +4,30 @@
 
 #include "BookingCategories.h"
 
+#include <utility>
 
-BookingCategory::BookingCategory() = default;
+
+const string General::sName = "General";
+const string Tatkal::sName = "Tatkal";
+const string PremiumTatkal::sName = "Premium Tatkal";
+const string Ladies::sName = "Ladies";
+const string SeniorCitizen::sName = "Senior Citizen";
+
+BookingCategory::BookingCategory(string name) : name_(std::move(name)) {
+}
+
+const string &BookingCategory::GetName() const {
+    return name_;
+}
+
+std::ostream &operator<<(std::ostream &os, const BookingCategory &category) {
+    os << category.name_;
+    return os;
+}
 
 BookingCategory::~BookingCategory() noexcept = default;
 
-General::General() : BookingCategory() {
-
+General::General() : BookingCategory(sName) {
 }
 
 float General::CalculateFare(float loadedFare, const BookingClass &bookingClass, const Passenger &passenger,
@@ -29,7 +46,7 @@ const BookingCategory &General::Type() {
 
 General::~General() noexcept = default;
 
-Concession::Concession() : BookingCategory() {
+Concession::Concession(const string &name) : BookingCategory(name) {
 }
 
 float Concession::CalculateFare(float loadedFare, float concessionFactor) {
@@ -39,7 +56,7 @@ float Concession::CalculateFare(float loadedFare, float concessionFactor) {
 Concession::~Concession() noexcept = default;
 
 
-Ladies::Ladies() : Concession() {
+Ladies::Ladies() : Concession(sName) {
 }
 
 bool Ladies::IsEligible(const Passenger &passenger, const Date &dateOfBooking, const Date &dateOfReservation) const {
@@ -58,7 +75,7 @@ const BookingCategory &Ladies::Type() {
 
 Ladies::~Ladies() noexcept = default;
 
-SeniorCitizen::SeniorCitizen() : Concession() {
+SeniorCitizen::SeniorCitizen() : Concession(sName) {
 }
 
 bool
@@ -91,11 +108,11 @@ bool Priority::IsEligible(const Passenger &passenger, const Date &dateOfBooking,
     return false;
 }
 
-Priority::~Priority() noexcept= default;
+Priority::~Priority() noexcept = default;
 
-Priority::Priority() = default;
+Priority::Priority(const string &name) : BookingCategory(name) {}
 
-Tatkal::Tatkal() : Priority() {
+Tatkal::Tatkal() : Priority(sName) {
 }
 
 float Tatkal::CalculateFare(float loadedFare, const BookingClass &bookingClass, const Passenger &passenger,
@@ -124,7 +141,7 @@ const BookingCategory &Tatkal::Type() {
 
 Tatkal::~Tatkal() = default;
 
-PremiumTatkal::PremiumTatkal() : Priority() {
+PremiumTatkal::PremiumTatkal() : Priority(sName) {
 }
 
 float PremiumTatkal::CalculateFare(float loadedFare, const BookingClass &bookingClass, const Passenger &passenger,

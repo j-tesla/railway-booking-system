@@ -52,7 +52,7 @@ template<> const unsigned BookingClass::SecondSitting::sNumberOfTiers = 0;
 BookingClass::~BookingClass() = default;
 
 std::ostream &operator<<(std::ostream &os, const BookingClass &aClass) {
-    os << "Travel Class = " << aClass.GetName() << "\n";
+    os << aClass.GetName() << "\n";
     os << "  - Mode: " << (aClass.IsSitting() ? "Sitting" : "Sleeping") << "\n";
     os << "  - AC: " << (aClass.IsAC() ? "Yes" : "No") << "\n";
     os << "  - Bunks: " << aClass.GetNumberOfTiers() << "\n";
