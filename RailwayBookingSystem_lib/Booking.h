@@ -7,13 +7,14 @@
 #ifndef RAILWAYBOOKINGSYSTEM_BOOKING_H
 #define RAILWAYBOOKINGSYSTEM_BOOKING_H
 
-#include <set>
+#include <vector>
 #include <string>
 #include <ostream>
 
 #include "Station.h"
 #include "Date.h"
-#include "BookingClass.h"
+#include "BookingClasses.h"
+#include "BookingCategories.h"
 #include "Passenger.h"
 #include "Railways.h"
 
@@ -26,31 +27,27 @@ using std::string;
 class BookingBase {
     const unsigned PNR;
 
-    static std::set<const BookingBase *> sBookings;
+    static std::vector<const BookingBase *> sBookings;
     static unsigned sBookingPNRSerial;
 
 protected:
     const Station fromStation_;
     const Station toStation_;
-    const Date date_;
+    const Date dateOfBooking_;
+    const Date dateOfReservation_;
+    const Passenger &passenger_;
+
     const BookingClass &bookingClass_;
-    Passenger *passenger_;
+    const BookingCategory &bookingCategory_;
 
     bool bookingStatus_ = false;
     string bookingMessage_{};
 
-public:
-    /**
-     * constructor
-     * @param fromStation
-     * @param toStation
-     * @param date
-     * @param bookingClass Type object of BookingClasses
-     * @param passenger
-     */
-    BookingBase(const Station &fromStation, const Station &toStation, const Date &date,
+    BookingBase(const Station &fromStation, const Station &toStation, const Date &dateOfBooking,
+                const Date &dateOfReservation,
                 const BookingClass &bookingClass,
-                Passenger *passenger = nullptr);
+                const BookingCategory &bookingCategory,
+                const Passenger &passenger);
 
     /**
      *  A BookingBase object should not be copyable
@@ -60,6 +57,7 @@ public:
 
     virtual ~BookingBase();
 
+public:
     /*
      * pure virtual function to implemented in derived classes
      */
@@ -90,12 +88,6 @@ public:
     const BookingClass &GetBookingClass() const;
 
     /**
-     *
-     * @return passenger
-     */
-    Passenger *GetPassenger() const;
-
-    /**
      * PNR is the unique identification code of the booking
      * @return PNR of the booking
      */
@@ -115,9 +107,13 @@ public:
 
     /**
      * Booking is active if in created object is in scope and accessible
-     * @return set of pointers to active bookings
+     * @return vector of pointers to active bookings
      */
-    static const std::set<const BookingBase *> &GetBookings();
+    static const std::vector<const BookingBase *> &GetBookings();
+
+    static void ClearBookings();
+
+    const Date &GetDateOfReservation() const;
 
     friend std::ostream &operator<<(std::ostream &os, const BookingBase &booking);
 };
@@ -128,18 +124,16 @@ public:
  */
 class Booking : public BookingBase {
     static const float sBaseFareRate;        //! needs initiate in application
-    static const float sACSurcharge;        //! needs initiate in application
-    static const float sLuxuryTaxPercent;       //! needs initiate in application
+
+    Booking(const Station &fromStation, const Station &toStation, const Date &dateOfBooking,
+            const Date &dateOfReservation, const BookingClass &bookingClass,
+            const BookingCategory &bookingCategory, const Passenger &passenger);
 
 public:
-    /**
-     * constructor to always available booking
-     * @param fromStation
-     * @param toStation
-     * @param date
-     * @param bookingClass Type object of BookingClasses
-     */
-    Booking(const Station &fromStation, const Station &toStation, const Date &date, const BookingClass &bookingClass);
+
+    static const Booking &Construct(const Station &fromStation, const Station &toStation, const Date &dateOfBooking,
+                                    const BookingClass &bookingClass, const BookingCategory &bookingCategory,
+                                    const Passenger &passenger) noexcept(false);
 
     /**
      * computes fare for the booking from with the business logic

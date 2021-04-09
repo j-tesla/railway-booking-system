@@ -27,8 +27,7 @@ const bool Sleeper::sIsLuxury = false;
 const bool SecondSitting::sIsLuxury = false;
 
 const float Booking::sBaseFareRate = 0.50; // Rs/km
-const float Booking::sACSurcharge = 50.00; // Rs
-const float Booking::sLuxuryTaxPercent = 25.0 / 100;
+// Rs
 
 
 void BookingApplication() {

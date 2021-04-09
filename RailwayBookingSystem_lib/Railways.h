@@ -48,7 +48,13 @@ public:
      * @param b name of Station
      * @return distance
      */
-    static unsigned GetDistance(const string &a, const string &b);
+    inline static unsigned GetDistance(const string &a, const string &b) {
+        return sDistances.at({Station(a), Station(b)});
+    }
+
+    inline static bool ValidStation(const Station &station) {
+        return sStations.find(station) != sStations.end();
+    }
 
 };
 

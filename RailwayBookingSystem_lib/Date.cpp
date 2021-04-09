@@ -5,6 +5,7 @@
  */
 
 #include <regex>
+#include <chrono>
 
 #include "Date.h"
 
@@ -76,3 +77,105 @@ Date Date::Construct(const string &date) noexcept(false) {
     }
     throw Bad_Date("Bad Date: Invalid pattern, dd/MMM/yyyy and dd//mm/yyyy are valid");
 }
+
+Date Date::today() {
+    std::time_t current_time = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+    tm utc_tm = *gmtime(&current_time);
+
+    auto year = utc_tm.tm_year + 1900;
+    auto month = utc_tm.tm_mon + 1;
+    auto day = utc_tm.tm_mday;
+
+    auto today = Date::Construct(day, month, year);
+    return today;
+}
+
+bool Date::operator<(const Date &other) const noexcept {
+    if (year_ != other.year_) return this->year_ < other.year_;
+    if (month_ != other.month_) return this->month_ < other.month_;
+    if (day_ != other.day_) return this->day_ < other.day_;
+    return false;
+}
+
+bool Date::operator<=(const Date &other) const noexcept {
+    return not(other < *this);
+}
+
+DateDelta Date::operator-(const Date &other) const noexcept(false) {
+    if (*this < other) {
+        throw Bad_Date("Bad Date: DateDelta can't be negative");
+    }
+
+    int years = year_ - other.year_;
+
+    int months = month_ - other.month_;
+
+    if (months < 0) {
+        months += 12;
+        years--;
+    }
+
+
+    int days = day_ - other.day_;
+
+    if (days < 0) {
+        if (month_ == 1 or month_ == 3 or month_ == 5 or month_ == 7 or month_ == 8 or month_ == 10 or month_ == 12) {
+            days += 31;
+        } else if (month_ != 2) {
+            days += 30;
+        } else {
+            if (year_ % 4) days += 28;
+            else days += 29;
+        }
+        months--;
+    }
+
+    return DateDelta::Construct(days, months, years);
+}
+
+DateDelta::DateDelta(DateDelta::Days days, DateDelta::Months months, DateDelta::Years years) noexcept: days_(days),
+                                                                                                       months_(months),
+                                                                                                       years_(years) {
+}
+
+DateDelta::DateDelta(const DateDelta &other) noexcept: days_(other.days_),
+                                                       months_(other.months_),
+                                                       years_(other.years_) {
+}
+
+DateDelta
+DateDelta::Construct(DateDelta::Days days, DateDelta::Months months, DateDelta::Years years) noexcept(false) {
+    if (days < 0 or months < 0 or years < 0) {
+        throw Bad_Date("Bad Date delta: days, months and years can't be negative");
+    }
+
+    if (days > 31) {
+        throw Bad_Date("Bad Date delta: days can't be greater than 31");
+    }
+
+    if (months > 12) {
+        throw Bad_Date("Bad Date delta: months can't be greater than 12");
+    }
+
+    return DateDelta(days, months, years);
+}
+
+bool DateDelta::operator<(const DateDelta &other) const noexcept {
+    if (years_ != other.years_) return years_ < other.years_;
+    if (months_ != other.months_) return months_ < other.months_;
+    if (days_ != other.days_) return days_ < other.days_;
+    return false;
+}
+
+const DateDelta DateDelta::OneYear(0, 0, 1);
+
+const DateDelta DateDelta::OneMonth(0, 1, 0);
+
+const DateDelta DateDelta::OneDay(1, 0, 0);
+
+bool DateDelta::operator>(const DateDelta &other) const noexcept {
+    return other < *this;
+}
+
+
+DateDelta::~DateDelta() = default;

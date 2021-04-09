@@ -7,21 +7,13 @@
 
 #include "Station.h"
 
+#include <utility>
 
-Station::Station(const string &name) : name_(name) {
+
+Station::Station(string name) noexcept: name_(std::move(name)) {
 
 }
 
-const string &Station::GetName() const {
-    return name_;
-}
 
-bool Station::operator<(const Station &other) const {
-    return name_ < other.name_;
-}
 
-bool Station::operator==(const Station &other) const {
-    return name_ == other.name_;
-}
-
-Station::~Station() = default;
+Station::~Station() noexcept = default;

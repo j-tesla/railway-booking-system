@@ -7,7 +7,10 @@ set(HEADER_FILES
         Date.h
         Station.h
         Railways.h
-        BookingClass.h
+        BookingClasses.h
+        BookingClasses.h
+        Gender.h
+        Divyaang.h
         Passenger.h
         Booking.h
         Exceptions.h)
@@ -16,7 +19,10 @@ set(SOURCE_FILES
         Date.cpp
         Station.cpp
         Railways.cpp
-        BookingClass.cpp
+        BookingClasses.cpp
+        BookingCategories.cpp
+        Gender.cpp
+        Divyaang.cpp
         Passenger.cpp
         Booking.cpp
         Exceptions.cpp)

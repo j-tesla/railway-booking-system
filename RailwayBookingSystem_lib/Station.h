@@ -17,28 +17,35 @@ class Station {
     const string name_;        //! name of the station
 
 public:
-    /**
+/**
      * Station identified by its name
      * @param name
      */
-    Station(const string &name);
+    Station(string name) noexcept;
 
-    ~Station();
+    ~Station() noexcept;
+
 
     /**
      *
      * @return name of station
      */
-    const string &GetName() const;
+    inline const string &GetName() const {
+        return name_;
+    };
 
     /**
      * compare names (strings)
      * @param other
      * @return bool
      */
-    bool operator<(const Station &other) const;
+    inline bool operator<(const Station &other) const {
+        return name_ < other.name_;
+    }
 
-    bool operator==(const Station &other) const;
+    inline bool operator==(const Station &other) const {
+        return name_ == other.name_;
+    }
 };
 
 

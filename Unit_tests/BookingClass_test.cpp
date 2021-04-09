@@ -10,7 +10,7 @@
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
 
-#include "BookingClass.h"
+#include "BookingClasses.h"
 
 
 /** \test
