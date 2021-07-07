@@ -19,13 +19,13 @@ using std::string;
 
 namespace PassengerDetails {
     class Name {
+        explicit Name(string firstName, string middleName, string lastName);
+
+    public:
         const string firstName_;
         const string middleName_;
         const string lastName_;
 
-        explicit Name(string firstName, string middleName, string lastName);
-
-    public:
 
         Name(const Name &other);
 
@@ -81,7 +81,7 @@ public:
 
     const Date &GetDateOfBirth() const;
 
-    const Divyaang *const GetDisabiltyType() const;
+    const Divyaang *GetDisabiltyType() const;
 
     const PassengerDetails::DivyaangID &GetDisabilityId() const;
 };

@@ -6,6 +6,8 @@
 #define RAILWAYBOOKINGSYSTEM_DIVYAANG_H
 
 #include <string>
+
+
 using std::string;
 
 template<typename T>
@@ -39,7 +41,7 @@ class Divyaang {
 protected:
     Divyaang();
 
-    virtual ~Divyaang();
+    virtual ~Divyaang() noexcept;
 
 public:
 
@@ -57,7 +59,7 @@ class DivyaangTypes : Divyaang {
 
     DivyaangTypes();
 
-    ~DivyaangTypes() override;
+    ~DivyaangTypes() noexcept override;
 
 public:
     static const Divyaang &Type();
@@ -82,7 +84,7 @@ const string &DivyaangTypes<T>::GetName() const {
 }
 
 template<typename T>
-DivyaangTypes<T>::~DivyaangTypes() = default;
+DivyaangTypes<T>::~DivyaangTypes() noexcept = default;
 
 
 #endif //RAILWAYBOOKINGSYSTEM_DIVYAANG_H

@@ -7,7 +7,6 @@
 #include <utility>
 
 
-const string General::sName = "General";
 const string Tatkal::sName = "Tatkal";
 const string PremiumTatkal::sName = "Premium Tatkal";
 const string Ladies::sName = "Ladies";
@@ -27,7 +26,7 @@ std::ostream &operator<<(std::ostream &os, const BookingCategory &category) {
 
 BookingCategory::~BookingCategory() noexcept = default;
 
-General::General() : BookingCategory(sName) {
+General::General() : BookingCategory("General") {
 }
 
 float General::CalculateFare(float loadedFare, const BookingClass &bookingClass, const Passenger &passenger,
@@ -101,7 +100,7 @@ SeniorCitizen::~SeniorCitizen() noexcept = default;
 
 
 bool Priority::IsEligible(const Passenger &passenger, const Date &dateOfBooking, const Date &dateOfReservation) const {
-    if (dateOfBooking - dateOfReservation == DateDelta::OneDay) {
+    if (dateOfBooking - dateOfReservation == DateDelta::OneDay()) {
         return true;
     }
 

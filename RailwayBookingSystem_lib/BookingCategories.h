@@ -40,7 +40,6 @@ public:
 };
 
 class General : public BookingCategory {
-    static const string sName;
     General();
 
 public:

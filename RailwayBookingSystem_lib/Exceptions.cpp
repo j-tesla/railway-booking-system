@@ -69,8 +69,6 @@ Bad_PhoneNumber::Bad_PhoneNumber() noexcept: Bad_Passenger() {
 Bad_PhoneNumber::Bad_PhoneNumber(const char *cause) noexcept: Bad_Passenger(cause) {
 }
 
-
-
 Bad_PhoneNumber::Bad_PhoneNumber(const Bad_PhoneNumber &other) noexcept: Bad_Passenger(other) {
 }
 
@@ -81,4 +79,13 @@ Bad_Booking::Bad_Booking(const char *cause) noexcept: Exception(cause) {
 }
 
 Bad_Booking::Bad_Booking(const Bad_Booking &other) noexcept: Exception(other) {
+}
+
+Bad_Railways::Bad_Railways() noexcept: Exception() {
+}
+
+Bad_Railways::Bad_Railways(const char *cause) noexcept: Exception(cause) {
+}
+
+Bad_Railways::Bad_Railways(const Bad_Railways &other) noexcept: Exception(other) {
 }

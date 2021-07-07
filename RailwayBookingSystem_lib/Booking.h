@@ -105,6 +105,12 @@ public:
      */
     const string &GetBookingMessage() const;
 
+/**
+     * Passenger details
+     * @return booking message
+     */
+    const Passenger &GetPassenger() const;
+
     /**
      * Booking is active if in created object is in scope and accessible
      * @return vector of pointers to active bookings
@@ -133,13 +139,15 @@ public:
 
     static const Booking &Construct(const Station &fromStation, const Station &toStation, const Date &dateOfBooking,
                                     const BookingClass &bookingClass, const BookingCategory &bookingCategory,
-                                    const Passenger &passenger) noexcept(false);
+                                    const Passenger &passenger, const Date& dateOfReservation = Date::Today()) noexcept(false);
 
     /**
      * computes fare for the booking from with the business logic
      * @return fare in Rupees (rounded off to nearest integer)
      */
     unsigned ComputeFare() const override;
+
+
 };
 
 

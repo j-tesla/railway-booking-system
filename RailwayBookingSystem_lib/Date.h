@@ -25,15 +25,22 @@ public:
     using Month = unsigned short;
     using Year = unsigned short;
 
-    const Day day_;
-    const Month month_;
-    const Year year_;
-
-    Date(Day day, Month month, Year year) noexcept;
+private:
+    Day day_;
+    Month month_;
+    Year year_;
 
 public:
 
+    Date(Day day, Month month, Year year) noexcept;
+
     ~Date() noexcept;
+
+    Day GetDay() const;
+
+    Month GetMonth() const;
+
+    Year GetYear() const;
 
     /**
      * 3 letter month codes
@@ -56,7 +63,7 @@ public:
      */
     static Date Construct(const string &date) noexcept(false);
 
-    static Date today();
+    static Date Today();
 
     inline bool operator==(const Date &other) const {
         return day_ == other.day_ and month_ == other.month_ and year_ == other.year_;
@@ -103,11 +110,17 @@ public:
         return std::tie(days_, months_, years_) == std::tie(rhs.days_, rhs.months_, rhs.years_);
     }
 
-    static const DateDelta OneYear;
+    static inline const DateDelta OneYear() {
+        return DateDelta(0, 0, 1);
+    }
 
-    static const DateDelta OneMonth;
+    static inline const DateDelta OneMonth() {
+        return DateDelta(0, 1, 0);
+    }
 
-    static const DateDelta OneDay;
+    static inline const DateDelta OneDay() {
+        return DateDelta(1, 0, 0);
+    }
 
 };
 

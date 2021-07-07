@@ -63,7 +63,7 @@ TEST(Date_test, DaysAfter30InvalidityCheck) {
     }
 }
 
-/**
+/** \test
  * negative test: checks validity of 29 Feb if leap year or otherwise
  */
 TEST(Date_test, February29Check) {

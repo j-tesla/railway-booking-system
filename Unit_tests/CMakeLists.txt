@@ -9,7 +9,7 @@ add_subdirectory(lib)
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
 # adding the Google_Tests_run target
-add_executable(Unit_tests_run Main.cpp Station_test.cpp Railways_test.cpp BookingClass_test.cpp Booking_test.cpp Date_test.cpp)
+add_executable(Unit_tests_run Main.cpp Station_test.cpp Railways_test.cpp BookingClasses_test.cpp Booking_test.cpp Date_test.cpp Passenger_test.cpp BookingCategories_test.cpp)
 
 # linking Google_Tests_run with DateConverter_lib which will be tested
 target_link_libraries(Unit_tests_run RailwayBookingSystem_lib)

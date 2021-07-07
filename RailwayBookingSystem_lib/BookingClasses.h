@@ -10,6 +10,8 @@
 
 #include <ostream>
 #include <string>
+
+
 using std::string;
 
 
@@ -66,7 +68,7 @@ class BookingClass {
 protected:
     BookingClass();
 
-    virtual ~BookingClass();
+    virtual ~BookingClass() noexcept;
 
 public:
     virtual const string &GetName() const = 0;
@@ -133,7 +135,7 @@ class BookingClassTypes : public BookingClass {
     BookingClassTypes();
 
 public:
-    ~BookingClassTypes() override;
+    ~BookingClassTypes() noexcept override;
 
     static const BookingClass &Type();
 
@@ -256,7 +258,7 @@ const string &BookingClassTypes<T>::GetName() const {
 }
 
 template<typename T>
-BookingClassTypes<T>::~BookingClassTypes() = default;
+BookingClassTypes<T>::~BookingClassTypes() noexcept = default;
 
 
 #endif //RAILWAYBOOKINGSYSTEM_BOOKINGCLASSES_H

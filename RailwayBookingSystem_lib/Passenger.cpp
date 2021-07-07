@@ -59,7 +59,7 @@ PassengerDetails::PhoneNumber PassengerDetails::PhoneNumber::Construct(const str
     }
     for (char c: phoneNumber) {
         if (not isdigit(c)) {
-            throw Bad_Aadhaar("Bad PhoneNumber: phone number should contain only numerical digits");
+            throw Bad_PhoneNumber("Bad PhoneNumber: phone number should contain only numerical digits");
         }
     }
     return PhoneNumber(phoneNumber);
@@ -78,21 +78,31 @@ const PassengerDetails::DivyaangID &Passenger::GetDisabilityId() const {
     return disabilityID_;
 }
 
-const Divyaang *const Passenger::GetDisabiltyType() const {
+const Divyaang *Passenger::GetDisabiltyType() const {
     return disabiltyType_;
 }
 
-Passenger::Passenger(const PassengerDetails::Name& name, const Date& dateOfBirth, const Gender& gender,
-                     const PassengerDetails::AadhaarNumber& aadhaar, const PassengerDetails::PhoneNumber& phone,
+Passenger::Passenger(const PassengerDetails::Name &name, const Date &dateOfBirth, const Gender &gender,
+                     const PassengerDetails::AadhaarNumber &aadhaar, const PassengerDetails::PhoneNumber &phone,
                      const Divyaang *const disabilityType, PassengerDetails::DivyaangID disabilityID)
         : name_(name), dateOfBirth_(dateOfBirth), gender_(gender), aadhaar_(aadhaar), phone_(phone),
           disabiltyType_(disabilityType), disabilityID_(std::move(disabilityID)) {
 }
 
-Passenger Passenger::Construct(const PassengerDetails::Name& name, const Date& dateOfBirth, const Gender& gender,
-                               const PassengerDetails::AadhaarNumber& aadhaar, const PassengerDetails::PhoneNumber& phone,
+Passenger Passenger::Construct(const PassengerDetails::Name &name, const Date &dateOfBirth, const Gender &gender,
+                               const PassengerDetails::AadhaarNumber &aadhaar,
+                               const PassengerDetails::PhoneNumber &phone,
                                const Divyaang *const disabilityType,
-                               const PassengerDetails::DivyaangID& disabilityID) noexcept(false) {
+                               const PassengerDetails::DivyaangID &disabilityID) noexcept(false) {
+
+    if (disabilityType == nullptr and not disabilityID.empty()) {
+        throw Bad_Passenger("Bad Passenger: Disability type needs to be entered along with disability ID");
+    }
+
+    if (disabilityType != nullptr and disabilityID.empty()) {
+        throw Bad_Passenger("Bad Passenger: Disability ID needs to be entered along with disability type");
+    }
+
     return Passenger(name, dateOfBirth, gender, aadhaar, phone, disabilityType, disabilityID);
 }
 

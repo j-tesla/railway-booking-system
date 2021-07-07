@@ -11,11 +11,19 @@
 
 
 /** \test
- * checks whether distance between stations is symmetric
+ * checks whether distance between stations_ is symmetric
  */
 TEST(Railways_test, DistanceSymmetry) {
     EXPECT_EQ(Railways::IndianRailways().GetDistance("Kolkata", "Mumbai"),
               Railways::IndianRailways().GetDistance("Mumbai", "Kolkata"));
     EXPECT_EQ(Railways::IndianRailways().GetDistance(Station("Kolkata"), Station("Mumbai")),
               Railways::IndianRailways().GetDistance(Station("Mumbai"), Station("Kolkata")));
+}
+
+TEST(Railways_test, InvalidStation) {
+    EXPECT_FALSE(Railways::IndianRailways().ValidStation(Station("Not a Valid Station")));
+}
+
+TEST(Railways_test, ValidStation) {
+    EXPECT_TRUE(Railways::IndianRailways().ValidStation(Station("Kolkata")));
 }

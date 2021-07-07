@@ -20,12 +20,12 @@ using std::string;
 
 
 class Railways {
-    Railways();
+    Railways(std::set<Station>  stations, std::map<std::pair<const Station, const Station>, unsigned>  distances);
 
     ~Railways();
 
-    static const std::set<Station> sStations;
-    static const std::map<std::pair<const Station, const Station>, unsigned> sDistances;
+    const std::set<Station> stations_;
+    const std::map<std::pair<const Station, const Station>, unsigned> distances_;
 
 public:
     /**
@@ -35,25 +35,25 @@ public:
     static const Railways &IndianRailways();
 
     /**
-     * Distance between two stations in the IndianRailways
+     * Distance between two stations_ in the IndianRailways
      * @param a Station
      * @param b Station
      * @return distance
      */
-    static unsigned GetDistance(const Station &a, const Station &b);
+    unsigned GetDistance(const Station &a, const Station &b) const;
 
     /**
-     * Distance between two stations in the IndianRailways
+     * Distance between two stations_ in the IndianRailways
      * @param a name of Station
      * @param b name of Station
      * @return distance
      */
-    inline static unsigned GetDistance(const string &a, const string &b) {
-        return sDistances.at({Station(a), Station(b)});
+    inline unsigned GetDistance(const string &a, const string &b) const{
+        return GetDistance(Station(a), Station(b));
     }
 
-    inline static bool ValidStation(const Station &station) {
-        return sStations.find(station) != sStations.end();
+    inline bool ValidStation(const Station &station) const {
+        return stations_.find(station) != stations_.end();
     }
 
 };

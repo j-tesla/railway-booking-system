@@ -85,4 +85,13 @@ public:
     Bad_Booking(const Bad_Booking &other) noexcept;
 };
 
+class Bad_Railways : public Exception {
+public:
+    Bad_Railways() noexcept;
+
+    explicit Bad_Railways(const char *cause) noexcept;
+
+    Bad_Railways(const Bad_Railways &other) noexcept;
+};
+
 #endif //RAILWAYBOOKINGSYSTEM_EXCEPTIONS_H

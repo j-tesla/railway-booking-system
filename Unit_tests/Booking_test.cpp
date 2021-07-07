@@ -13,133 +13,109 @@
 #include "Booking.h"
 
 
-/** \class test fixture
- * fixture for Booking_test test suite
- */
-class Booking_test : public ::testing::Test {
-protected:
-    // setup code for the test suite
-    static void SetUpTestSuite() {
-        b1 = new Booking(Station("Mumbai"), Station("Chennai"), Date::Construct(5, 5, 2021), ACChairCar::Type());
-        b1_ = new Booking(Station("Mumbai"), Station("Chennai"), Date::Construct(5, 6, 2020), ACChairCar::Type());
-        b2 = new Booking(Station("Kolkata"), Station("Chennai"), Date::Construct(6, 5, 2021), Sleeper::Type());
-    }
+const Date dateOfReservation(10, 10, 2020);
+const Date dateOfBooking(dateOfReservation.GetDay(), dateOfReservation.GetMonth() + 1, dateOfReservation.GetYear());
+const Date twentytwo_yrs(dateOfReservation.GetDay(), dateOfReservation.GetMonth(), dateOfReservation.GetYear() - 22);
+const Date ninty_yrs(dateOfReservation.GetDay(), dateOfReservation.GetMonth(), dateOfReservation.GetYear() - 90);
+const Date fiftynine_yrs(dateOfReservation.GetDay(), dateOfReservation.GetMonth(), dateOfReservation.GetYear() - 59);
+const Date sixtyone_yrs(dateOfReservation.GetDay(), dateOfReservation.GetMonth(), dateOfReservation.GetYear() - 61);
+const Date fiftyeight_yrs(dateOfReservation.GetDay(), dateOfReservation.GetMonth(), dateOfReservation.GetYear() - 58);
 
-    static void TearDownTestSuite() {
-        delete b1;
-        delete b1_;
-        delete b2;
-        b1 = b1_ = b2 = nullptr;
-    }
 
-    static const Booking *b1;
-    static const Booking *b1_;
-    static const Booking *b2;
-};
+const PassengerDetails::Name validName = PassengerDetails::Name::Construct("Valid", "Name");
+const PassengerDetails::AadhaarNumber validAadhaar = PassengerDetails::AadhaarNumber::Construct("123456789012");
+const PassengerDetails::PhoneNumber validPhoneNumber = PassengerDetails::PhoneNumber::Construct("1023456789");
 
-const Booking *Booking_test::b1 = nullptr;
-const Booking *Booking_test::b1_ = nullptr;
-const Booking *Booking_test::b2 = nullptr;
+const Passenger man = Passenger::Construct(validName, twentytwo_yrs, Gender::Male::Type(), validAadhaar,
+                                           validPhoneNumber);
+const Passenger lady = Passenger::Construct(validName, twentytwo_yrs, Gender::Female::Type(), validAadhaar,
+                                            validPhoneNumber);
+const Passenger oldMan = Passenger::Construct(validName, ninty_yrs, Gender::Male::Type(), validAadhaar,
+                                              validPhoneNumber);
+const Passenger oldLady = Passenger::Construct(validName, ninty_yrs, Gender::Female::Type(), validAadhaar,
+                                               validPhoneNumber);
+const Passenger blind = Passenger::Construct(validName, twentytwo_yrs, Gender::Male::Type(), validAadhaar,
+                                             validPhoneNumber, &Divyaang::Blind::Type(), "blind-id");
+const Passenger cancer_patient = Passenger::Construct(validName, twentytwo_yrs, Gender::Male::Type(), validAadhaar,
+                                                      validPhoneNumber, &Divyaang::CancerPatients::Type(),
+                                                      "cancer-patient-id");
 
+
+const Booking &b1 = Booking::Construct(Station("Kolkata"), Station("Delhi"), dateOfBooking,
+                                       BookingClass::Sleeper::Type(), General::Type(), man, dateOfReservation);
+const Booking &b2 = Booking::Construct(Station("Chennai"), Station("Delhi"), dateOfBooking,
+                                       BookingClass::ExecutiveChairCar::Type(), General::Type(), lady,
+                                       dateOfReservation);
+const Booking &b3 = Booking::Construct(Station("Kolkata"), Station("Mumbai"), dateOfBooking,
+                                       BookingClass::ACChairCar::Type(), SeniorCitizen::Type(), oldLady,
+                                       dateOfReservation);
 
 /** \test
  * checks PNR sequence
  */
-TEST_F(Booking_test, PNRSequenceCheck) {
-    EXPECT_EQ(b1->GetPNR(), 1);
-    EXPECT_EQ(b1_->GetPNR(), 2);
-    EXPECT_EQ(b2->GetPNR(), 3);
+TEST(Booking_test, PNRSequenceCheck) {
+    EXPECT_EQ(b1.GetPNR(), 1);
+    EXPECT_EQ(b2.GetPNR(), 2);
+    EXPECT_EQ(b3.GetPNR(), 3);
 }
 
-/** \test
- * checks fare's independence of date
- */
-TEST_F(Booking_test, DateIndependanceCheck) {
-    EXPECT_EQ(b1->ComputeFare(), b1_->ComputeFare());
-}
 
 /** \test
  * checks number of bookings active
  */
-TEST_F(Booking_test, BookingsCheck) {
-    EXPECT_EQ(Booking::GetBookings().size(), 3);        // 3 bookings in Fixture
-    {
-        Booking bx(Station("Chennai"), Station("Delhi"), Date::Construct(2, 1, 2022), AC2Tier::Type());
-        EXPECT_EQ(Booking::GetBookings().size(), 4);        // 3 + 1 bookings
-    }
-    EXPECT_EQ(Booking::GetBookings().size(), 3);        // 4 - 1 bookings (last booking went out of scope)
+TEST(Booking_test, BookingsCountIncrementCheck) {
+    auto initial = Booking::GetBookings().size();
+    const Booking &bx = Booking::Construct(Station("Chennai"), Station("Delhi"), dateOfBooking,
+                                           BookingClass::AC2Tier::Type(), SeniorCitizen::Type(), oldMan,
+                                           dateOfReservation);
+    EXPECT_EQ(Booking::GetBookings().size(), initial + 1);
 }
 
 /** \test
  * checks whether booking status is always true
  */
-TEST_F(Booking_test, BookingStatusCheck) {
-    EXPECT_EQ(b1->GetBookingStatus(), true);
-    EXPECT_EQ(b1_->GetBookingStatus(), true);
-    EXPECT_EQ(b2->GetBookingStatus(), true);
+TEST(Booking_test, BookingStatusCheck) {
+    EXPECT_EQ(b1.GetBookingStatus(), true);
+    EXPECT_EQ(b2.GetBookingStatus(), true);
+    EXPECT_EQ(b3.GetBookingStatus(), true);
+}
+
+
+/** \test
+ * checks to stations_
+ */
+TEST(Booking_test, ToStationCheck) {
+    EXPECT_EQ(b1.GetToStation(), Station("Delhi"));
+    EXPECT_EQ(b2.GetToStation(), Station("Delhi"));
+    EXPECT_EQ(b3.GetToStation(), Station("Mumbai"));
 }
 
 /** \test
- * checks booking classes
+ * checks from stations_
  */
-TEST_F(Booking_test, BookingClassCheck) {
-    EXPECT_EQ(b1->GetBookingClass(), ACChairCar::Type());
-    EXPECT_EQ(b1_->GetBookingClass(), ACChairCar::Type());
-    EXPECT_EQ(b2->GetBookingClass(), Sleeper::Type());
-}
-
-/** \test
- * checks to stations
- */
-TEST_F(Booking_test, ToStationCheck) {
-    EXPECT_EQ(b1->GetToStation(), Station("Chennai"));
-    EXPECT_EQ(b1_->GetToStation(), Station("Chennai"));
-    EXPECT_EQ(b2->GetToStation(), Station("Chennai"));
-}
-
-/** \test
- * checks from stations
- */
-TEST_F(Booking_test, FromStationCheck) {
-    EXPECT_EQ(b1->GetFromStation(), Station("Mumbai"));
-    EXPECT_EQ(b1_->GetFromStation(), Station("Mumbai"));
-    EXPECT_EQ(b2->GetFromStation(), Station("Kolkata"));
-}
-
-/** \test
- * checks for passenger being null
- */
-TEST_F(Booking_test, NullPassengerCheck) {
-    EXPECT_EQ(b1->GetPassenger(), nullptr);
-    EXPECT_EQ(b1_->GetPassenger(), nullptr);
-    EXPECT_EQ(b2->GetPassenger(), nullptr);
-}
-
-/** \test
- * checks dates
- */
-TEST_F(Booking_test, DateCheck) {
-    EXPECT_EQ(b1->GetDate(), Date::Construct(5, 5, 2021));
-    EXPECT_EQ(b1_->GetDate(), Date::Construct(5, 6, 2020));
-    EXPECT_EQ(b2->GetDate(), Date::Construct(6, 5, 2021));
+TEST(Booking_test, FromStationCheck) {
+    EXPECT_EQ(b1.GetFromStation(), Station("Kolkata"));
+    EXPECT_EQ(b2.GetFromStation(), Station("Chennai"));
+    EXPECT_EQ(b3.GetFromStation(), Station("Kolkata"));
 }
 
 /** \test
  * checks fares
  * depends on initialised const values
  */
-TEST_F(Booking_test, FareCheck) {
-    EXPECT_EQ(b1->ComputeFare(), 886);
-    EXPECT_EQ(b2->ComputeFare(), 830);
+TEST(Booking_test, FareCheck) {
+    EXPECT_EQ(b1.ComputeFare(), 756);
+    EXPECT_EQ(b2.ComputeFare(), 5510);
+    EXPECT_EQ(b3.ComputeFare(), 1248);
 }
 
 /** \test
  * checks format of ostream << overload
  */
-TEST_F(Booking_test, OstreamFormatCheck) {
+TEST(Booking_test, OstreamFormatCheck) {
     std::stringstream buffer;
     std::string line;
-    buffer << *b1;
+    buffer << b1;
 
     getline(buffer, line);
     EXPECT_EQ(line, "BOOKING SUCCEEDED:");
@@ -164,5 +140,32 @@ TEST_F(Booking_test, OstreamFormatCheck) {
     getline(buffer, line);
 
     getline(buffer, line);
+    EXPECT_THAT(line, testing::MatchesRegex(R"(Booking Category = .+)"));
+
+    getline(buffer, line);
     EXPECT_THAT(line, testing::MatchesRegex(R"(Fare = [0-9]+)"));
 }
+
+TEST(Booking_test, InvalidStationCheck) {
+    EXPECT_THROW(Booking::Construct(Station("Wrong"), Station("Kolkata"), dateOfBooking, BookingClass::AC2Tier::Type(),
+                                    General::Type(), man, dateOfReservation), Bad_Booking);
+    EXPECT_THROW(
+            Booking::Construct(Station("Chennai"), Station("Wrong"), dateOfBooking, BookingClass::ACChairCar::Type(),
+                               General::Type(), oldLady, dateOfReservation), Bad_Booking);
+}
+
+TEST(Booking_test, IneligiblePassengerCheck) {
+    EXPECT_THROW(Booking::Construct(Station("Wrong"), Station("Kolkata"), dateOfBooking, BookingClass::AC2Tier::Type(),
+                                    SeniorCitizen::Type(), man, dateOfReservation), Bad_Booking);
+}
+
+TEST(Booking_test, PastBookingDateCheck) {
+    EXPECT_THROW(Booking::Construct(Station("Wrong"), Station("Kolkata"), dateOfReservation, BookingClass::AC2Tier::Type(),
+                                    SeniorCitizen::Type(), man, dateOfBooking), Bad_Booking);
+}
+
+TEST(Booking_test, MoreThanAfterOneYearBookingDateCheck) {
+    EXPECT_THROW(Booking::Construct(Station("Wrong"), Station("Kolkata"), Date::Construct(10, 10, dateOfReservation.GetYear() + 2), BookingClass::AC2Tier::Type(),
+                                    SeniorCitizen::Type(), man, dateOfReservation), Bad_Booking);
+}
+

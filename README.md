@@ -1,6 +1,7 @@
 # RailwayBookingSystem
 Software Engineering: CS20006  
-Assignment – 3: Inheritance Hierarchy, Design, Analysis & Testing
+
+19CS10068 - Jayanth PSY
 
 ---
 
@@ -29,10 +30,18 @@ Booking, but extremely scaled down in features)
       contains implementations and definitions of BookingCase and Booking classes
     * Booking.h:  
       contains BookingCase and Booking classes
-    * BookingClass.cpp:  
+    * BookingClasses.cpp:  
       contains implementations and definitions of abstract class BookingClass and base classes
-    * BookingClass.h  
+    * BookingClasses.h  
       contains abstract class BookingClass and base classes
+    * BookingCategories.cpp:  
+      contains implementations and definitions of abstract class BookingCategory and base classes
+    * BookingCategories.h  
+      contains abstract class BookingCategory and base classes
+    * Divyaang.cpp:  
+      contains implementations and definitions of abstract class Divyaang and base classes
+    * Divyaang.h  
+      contains abstract class Divyaang and base classes
     * Date.cpp  
       contains implementations and declarations of Date class
     * Date.h  
@@ -63,5 +72,10 @@ Booking, but extremely scaled down in features)
     * Railways_test.cpp  
       contains unit tests of Railways class
     * Station_test.cpp  
-    
-    
+      contains unit tests of Station class
+    * BookingClasses_test.cpp  
+      contains unit tests of Booking classes
+    * BookingCategories_test.cpp  
+      contains unit tests of Booking categories
+    * Passenger_test.cpp
+      contains unit tests of Passenger and related classes

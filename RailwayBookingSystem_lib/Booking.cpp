@@ -86,6 +86,10 @@ void BookingBase::ClearBookings() {
 
 }
 
+const Passenger &BookingBase::GetPassenger() const {
+    return passenger_;
+}
+
 Booking::Booking(const Station &fromStation,
                  const Station &toStation,
                  const Date &dateOfBooking,
@@ -112,7 +116,7 @@ unsigned Booking::ComputeFare() const {
 
 const Booking &Booking::Construct(const Station &fromStation, const Station &toStation, const Date &dateOfBooking,
                                   const BookingClass &bookingClass,
-                                  const BookingCategory &bookingCategory, const Passenger &passenger) noexcept(false) {
+                                  const BookingCategory &bookingCategory, const Passenger &passenger, const Date& dateOfReservation) noexcept(false) {
 
     if (not Railways::IndianRailways().ValidStation(fromStation)) {
         throw Bad_Booking("Bad Booking: invalid from station");
@@ -121,20 +125,19 @@ const Booking &Booking::Construct(const Station &fromStation, const Station &toS
         throw Bad_Booking("Bad Booking: invalid to station");
     }
 
-    Date today = Date::today();
-    if (not(today < dateOfBooking)) {
+    if (not(dateOfReservation < dateOfBooking)) {
         throw Bad_Booking("Bad Booking: date of travel must be later than date of reservation");
     }
 
-    if (dateOfBooking - today > DateDelta::OneYear) {
-        throw Bad_Booking("Bad Booking: date of travel should be within one year from today");
+    if (dateOfBooking - dateOfReservation > DateDelta::OneYear()) {
+        throw Bad_Booking("Bad Booking: date of travel should be within one year from Today");
     }
 
-    if (not bookingCategory.IsEligible(passenger, dateOfBooking, today)) {
+    if (not bookingCategory.IsEligible(passenger, dateOfBooking, dateOfReservation)) {
         throw Bad_Booking("Bad Booking: details provided are ineligible to the selected booking category");
     }
 
-    auto pBooking = new const Booking(fromStation, toStation, dateOfBooking, today, bookingClass, bookingCategory,
+    auto pBooking = new const Booking(fromStation, toStation, dateOfBooking, dateOfReservation, bookingClass, bookingCategory,
                                       passenger);
     return *pBooking;
 }

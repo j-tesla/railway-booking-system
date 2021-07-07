@@ -7,4 +7,4 @@
 
 Divyaang::Divyaang() = default;
 
-Divyaang::~Divyaang() = default;
+Divyaang::~Divyaang() noexcept = default;

@@ -78,7 +78,7 @@ Date Date::Construct(const string &date) noexcept(false) {
     throw Bad_Date("Bad Date: Invalid pattern, dd/MMM/yyyy and dd//mm/yyyy are valid");
 }
 
-Date Date::today() {
+Date Date::Today() {
     std::time_t current_time = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
     tm utc_tm = *gmtime(&current_time);
 
@@ -133,15 +133,25 @@ DateDelta Date::operator-(const Date &other) const noexcept(false) {
     return DateDelta::Construct(days, months, years);
 }
 
+Date::Day Date::GetDay() const {
+    return day_;
+}
+
+Date::Month Date::GetMonth() const {
+    return month_;
+}
+
+Date::Year Date::GetYear() const {
+    return year_;
+}
+
 DateDelta::DateDelta(DateDelta::Days days, DateDelta::Months months, DateDelta::Years years) noexcept: days_(days),
                                                                                                        months_(months),
                                                                                                        years_(years) {
 }
 
-DateDelta::DateDelta(const DateDelta &other) noexcept: days_(other.days_),
-                                                       months_(other.months_),
-                                                       years_(other.years_) {
-}
+DateDelta::DateDelta(const DateDelta &other) noexcept: days_(other.days_), months_(other.months_),
+                                                       years_(other.years_) {}
 
 DateDelta
 DateDelta::Construct(DateDelta::Days days, DateDelta::Months months, DateDelta::Years years) noexcept(false) {
@@ -166,12 +176,6 @@ bool DateDelta::operator<(const DateDelta &other) const noexcept {
     if (days_ != other.days_) return days_ < other.days_;
     return false;
 }
-
-const DateDelta DateDelta::OneYear(0, 0, 1);
-
-const DateDelta DateDelta::OneMonth(0, 1, 0);
-
-const DateDelta DateDelta::OneDay(1, 0, 0);
 
 bool DateDelta::operator>(const DateDelta &other) const noexcept {
     return other < *this;

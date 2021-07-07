@@ -124,6 +124,38 @@ const float SeniorCitizen::sFemaleConcessionFactor = 0.40;
  */
 void BookingApplication() {
 // Bookings by different booking classes
+
+
+    const Date dateOfReservation(10, 10, 2020);
+    const Date dateOfBooking(dateOfReservation.GetDay(), dateOfReservation.GetMonth() + 1, dateOfReservation.GetYear());
+    const Date twentytwo_yrs(dateOfReservation.GetDay(), dateOfReservation.GetMonth(),
+                             dateOfReservation.GetYear() - 22);
+    const Date ninty_yrs(dateOfReservation.GetDay(), dateOfReservation.GetMonth(), dateOfReservation.GetYear() - 90);
+    const Date fiftynine_yrs(dateOfReservation.GetDay(), dateOfReservation.GetMonth(),
+                             dateOfReservation.GetYear() - 59);
+    const Date sixtyone_yrs(dateOfReservation.GetDay(), dateOfReservation.GetMonth(), dateOfReservation.GetYear() - 61);
+    const Date fiftyeight_yrs(dateOfReservation.GetDay(), dateOfReservation.GetMonth(),
+                              dateOfReservation.GetYear() - 58);
+
+
+    const PassengerDetails::Name validName = PassengerDetails::Name::Construct("Valid", "Name");
+    const PassengerDetails::AadhaarNumber validAadhaar = PassengerDetails::AadhaarNumber::Construct("123456789012");
+    const PassengerDetails::PhoneNumber validPhoneNumber = PassengerDetails::PhoneNumber::Construct("1023456789");
+
+    const Passenger man = Passenger::Construct(validName, twentytwo_yrs, Gender::Male::Type(), validAadhaar,
+                                               validPhoneNumber);
+    const Passenger lady = Passenger::Construct(validName, twentytwo_yrs, Gender::Female::Type(), validAadhaar,
+                                                validPhoneNumber);
+    const Passenger oldMan = Passenger::Construct(validName, ninty_yrs, Gender::Male::Type(), validAadhaar,
+                                                  validPhoneNumber);
+    const Passenger oldLady = Passenger::Construct(validName, ninty_yrs, Gender::Female::Type(), validAadhaar,
+                                                   validPhoneNumber);
+    const Passenger blind = Passenger::Construct(validName, twentytwo_yrs, Gender::Male::Type(), validAadhaar,
+                                                 validPhoneNumber, &Divyaang::Blind::Type(), "blind-id");
+    const Passenger cancer_patient = Passenger::Construct(validName, twentytwo_yrs, Gender::Male::Type(), validAadhaar,
+                                                          validPhoneNumber, &Divyaang::CancerPatients::Type(),
+                                                          "cancer-patient-id");
+
     Passenger pawan = Passenger::Construct(PassengerDetails::Name::Construct("Pawan", "Kumar"),
                                            Date::Construct(20, 11, 2001), Gender::Male::Type(),
                                            PassengerDetails::AadhaarNumber::Construct("111122223333"),
@@ -132,21 +164,45 @@ void BookingApplication() {
 
     const Booking &b1 = Booking::Construct(Station("Delhi"), Station("Mumbai"), Date::Construct(20, 8, 2021),
                                            BookingClass::AC3Tier::Type(), DivyaangCategory<Divyaang::Blind>::Type(),
-                                           pawan);
+                                           pawan, dateOfReservation);
 
     const Booking &b2 = Booking::Construct(Station("Delhi"), Station("Mumbai"), Date::Construct(20, 8, 2021),
                                            BookingClass::Sleeper::Type(), DivyaangCategory<Divyaang::Blind>::Type(),
-                                           pawan);
+                                           pawan, dateOfReservation);
+    const Booking &b3 = Booking::Construct(Station("Kolkata"), Station("Delhi"), dateOfBooking,
+                                           BookingClass::FirstClass::Type(), General::Type(), man, dateOfReservation);
+    const Booking &b4 = Booking::Construct(Station("Chennai"), Station("Delhi"), dateOfBooking,
+                                           BookingClass::ExecutiveChairCar::Type(), General::Type(), lady,
+                                           dateOfReservation);
+    const Booking &b5 = Booking::Construct(Station("Kolkata"), Station("Mumbai"), dateOfBooking,
+                                           BookingClass::ACChairCar::Type(), SeniorCitizen::Type(), oldLady,
+                                           dateOfReservation);
 
+    try {
+        Booking::Construct(Station("Wrong"), Station("Kolkata"), dateOfBooking, BookingClass::AC2Tier::Type(),
+                           General::Type(), man, dateOfReservation);
+    } catch (Bad_Booking &e) {
+        std::cout << e.what() << std::endl;
+    }
 
-//    Booking b1(Station("Mumbai"), Station("Delhi"), Date::Construct(15, 2, 2021), ACFirstClass::Type());
-//    Booking b2(Station("Kolkata"), Station("Delhi"), Date::Construct(5, 3, 2021), AC2Tier::Type());
-//    Booking b3(Station("Mumbai"), Station("Kolkata"), Date::Construct(17, 3, 2021), FirstClass::Type());
-//    Booking b4(Station("Mumbai"), Station("Delhi"), Date::Construct(23, 3, 2021), AC3Tier::Type());
-//    Booking b5(Station("Chennai"), Station("Delhi"), Date::Construct(25, 4, 2021), ACChairCar::Type());
-//    Booking b6(Station("Chennai"), Station("Kolkata"), Date::Construct(7, 5, 2021), Sleeper::Type());
-//    Booking b7(Station("Mumbai"), Station("Delhi"), Date::Construct(19, 5, 2021), SecondSitting::Type());
-//    Booking b8(Station("Delhi"), Station("Mumbai"), Date::Construct(22, 5, 2021), SecondSitting::Type());
+    try {
+        Booking::Construct(Station("Wrong"), Station("Kolkata"), dateOfBooking, BookingClass::AC2Tier::Type(),
+                           SeniorCitizen::Type(), man, dateOfReservation);
+    } catch (Bad_Booking &e) {
+        std::cout << e.what() << std::endl;
+    }
+
+    try {
+        Passenger::Construct(PassengerDetails::Name::Construct("Name"),
+                             Date::Construct(20, 10, 2000),
+                             Gender::Female::Type(),
+                             PassengerDetails::AadhaarNumber::Construct("012345678912"),
+                             PassengerDetails::PhoneNumber::Construct("0123456789"),
+                             nullptr, "DivyaangID");
+    } catch (Bad_Passenger &e) {
+        std::cout << e.what() << std::endl;
+    }
+
 
 // Output the bookings done
     for (auto it : Booking::GetBookings()) {
